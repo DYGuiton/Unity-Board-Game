@@ -307,18 +307,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad706538042e17e4fa91be1f49969f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tile: {fileID: 8665308767951952440, guid: 3cbbdcd1cc8ab38488140ff57dd9f8b4, type: 3}
+  MapTransform: {fileID: 0}
+  TileObject: {fileID: 8665308767951952440, guid: 3cbbdcd1cc8ab38488140ff57dd9f8b4,
+    type: 3}
   Tile_List: []
   MajorTile_List: 
   Tile_Materials:
   - {fileID: 2100000, guid: 8dafd9abbeed36a4695975819e354a72, type: 2}
-  - {fileID: 2100000, guid: 71c321cd3a7657f46864b2ec6adf95d7, type: 2}
   - {fileID: 2100000, guid: a8ab9e435efaa994699a66ef8c34ae0e, type: 2}
+  - {fileID: 2100000, guid: 71c321cd3a7657f46864b2ec6adf95d7, type: 2}
+  - {fileID: 2100000, guid: 4612129136efba247a8558ca442c50af, type: 2}
+  - {fileID: 2100000, guid: 100cc45d4d89ee043a36d92692bca7bd, type: 2}
   - {fileID: 2100000, guid: 262fe2cb44589c64981dfd4d3d25c284, type: 2}
   - {fileID: 2100000, guid: f841c626af2410b44818c3443d49854c, type: 2}
-  - {fileID: 2100000, guid: 100cc45d4d89ee043a36d92692bca7bd, type: 2}
   - {fileID: 2100000, guid: 9102c7742b726e84182064d84961b74e, type: 2}
-  - {fileID: 2100000, guid: 4612129136efba247a8558ca442c50af, type: 2}
+  Tyle_Types:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1794611549
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db8904564d97e3a4189cb1002394f39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Size: 6
+  MapSize: 5
 --- !u!4 &1794611551
 Transform:
   m_ObjectHideFlags: 0
