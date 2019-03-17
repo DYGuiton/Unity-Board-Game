@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5226216159057534858}
   - component: {fileID: 2931871015732834355}
-  - component: {fileID: 1219608106604746893}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: TileObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,18 +69,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &1219608106604746893
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8665308767951952440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f56e649ca98a2c94fbba3d40c502a1f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &9182369815754924433
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3,37 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile : MonoBehaviour, IComparable<Tile> {
+public class Tile : MonoBehaviour {
+    /* Tile Types:
+     * 0. Demon Lords Castle
+     * 1. Road
+     * 2. Town
+     * 3. Dryland
+     * 4. Forest
+     * 5. Mine
+     * 6. Plains
+     * 7. Sea
+     *
+     * Major Tile: 0-2
+     * Minor Tiles: 3-7
+     */
 
     public int Index { get; set; }
-    public bool isMajor_Tile { get; set;}
+    public int TileType { get; set; }
+    public Vector3 location { get; set; }
+    public bool isMajor_Tile { get; set; }
+    public Material material { get; set; }
 
-    // Start is called before the first frame update
-    void Start() {
-
+    public void copyBlueprint(TileBlueprint myBlueprint) {
+        Index = myBlueprint.Index;
+        TileType = myBlueprint.TileType;
+        location = myBlueprint.Location;
+        isMajor_Tile = myBlueprint.isMajor_Tile;
     }
 
-    // Update is called once per frame
-    void Update() {
-
-    }
-
-    public int CompareTo(Tile other) {
-        if (other == null) {
-            return 1;
-        }
-        else {
-
-            //Compare two Tiles and return the leftmost one
-            int compare_value = gameObject.transform.position.x.CompareTo(other.gameObject.transform.position.x);
-            compare_value = compare_value * -1;
-
-            //If the Tiles are in the same row, return the highest one
-            if(compare_value == 0) {
-                compare_value = gameObject.transform.position.z.CompareTo(other.gameObject.transform.position.z);
-            }
-
-            return compare_value;
-        }
-    }
 }

@@ -7,15 +7,14 @@ public class GameManager : MonoBehaviour {
     // Start is called before the first frame update
 
     MapController Map_Controller;
-    public int Size = 10;
-
+    public int MapSize = 10;
 
     void Start() {
         Map_Controller = GameObject.Find("Map").GetComponent<MapController>();
-        Map_Controller.generateField(Size);
+        Map_Controller.generateFieldBlueprint(MapSize);
+        Map_Controller.generateField();
     }
 
-    // Update is called once per frame
     void Update() {
 
     }
