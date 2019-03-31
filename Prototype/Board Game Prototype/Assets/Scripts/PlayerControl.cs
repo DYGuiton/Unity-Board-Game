@@ -6,17 +6,13 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour {
     public Camera ViewCamera;
     TownTile myTown;
-
-    public GameObject currentSelection;
-
+    public GameObject selectedObject;
     public bool myTurn { get; set; }
 
-    // Start is called before the first frame update
     void Start() {
 
     }
 
-    // Update is called once per frame
     void Update() {
         handleUserInterfacing();
     }
@@ -32,11 +28,18 @@ public class PlayerControl : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit)) {
 
-                Debug.Log("We Hit: " + hit.collider.name + "\n at position: " + hit.point);
+                //Resets the previously selected object to it's original view
+                if (selectedObject != null) {
+                    selectedObject.GetComponent<MeshRenderer>().material.shader = Shader.Find("Standard");
+                }
 
-                //If we hit nothing, set our selection to null
-
-                //Highlight the clicked object and set it to our currentSelection
+                //This block of code handles how selection is indicated on an object.
+                selectedObject = hit.collider.gameObject;
+                selectedObject.GetComponent<MeshRenderer>().material.shader = Shader.Find("Outlined/UltimateOutline");
+                selectedObject.GetComponent<MeshRenderer>().material.SetColor("_FirstOutlineColor", new Color(255, 207, 0, 1));
+                selectedObject.GetComponent<MeshRenderer>().material.SetFloat("_FirstOutlineWidth", 0.1f);
+                selectedObject.GetComponent<MeshRenderer>().material.SetColor("_SecondOutlineColor", new Color(255, 207, 0, 0));
+                selectedObject.GetComponent<MeshRenderer>().material.SetFloat("_SecondOutlineWidth", 0.0f);
             }
         }
     }

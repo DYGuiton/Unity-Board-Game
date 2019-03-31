@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
-    // Start is called before the first frame update
 
     MapController Map_Controller;
     public int MapSize = 10;
