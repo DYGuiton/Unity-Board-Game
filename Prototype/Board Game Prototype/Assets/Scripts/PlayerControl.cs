@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
-    public Camera ViewCamera;
+    public int id { get; set; }
+    public Camera viewCamera;
     TownTile myTown;
     public GameObject selectedObject;
     public bool myTurn { get; set; }
+
+    public event EventHandler onMyTurn;
 
     void Start() {
 
@@ -18,12 +21,11 @@ public class PlayerControl : MonoBehaviour {
     }
 
     private void handleUserInterfacing() {
-        if (!myTurn) {
+        if (!myTurn)
             return;
-        }
 
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
-            Ray ray = ViewCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit)) {
@@ -46,7 +48,9 @@ public class PlayerControl : MonoBehaviour {
 
     public void setMyTurn(bool isMyTurn) {
         myTurn = isMyTurn;
-        Camera.main.enabled = !isMyTurn;
-        ViewCamera.enabled = isMyTurn;
+
+        if (isMyTurn) {
+            onMyTurn(this, new EventArgs());
+        }
     }
 }

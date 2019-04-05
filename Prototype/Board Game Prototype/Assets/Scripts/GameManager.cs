@@ -5,18 +5,24 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-    MapController Map_Controller;
-    public int MapSize = 10;
+    MapController mapController;
+    public int mapSize = 10;
     public GameObject currentPlayer;
+    public CameraManager cameraManager;
+    public PlayerManager playerManager;
 
     void Start() {
-        Map_Controller = GameObject.Find("Map").GetComponent<MapController>();
-        Map_Controller.generateFieldBlueprint(MapSize);
-        Map_Controller.generateField();
-        currentPlayer.transform.Find("PlayerController").GetComponent<PlayerControl>().setMyTurn(true);
+        mapController = GameObject.Find("Map").GetComponent<MapController>();
+        mapController.generateFieldBlueprint(mapSize);
+        mapController.generateField();
+
+        registerPlayer();
+
+        playerManager.playerObjects[0].transform.Find("PlayerController").GetComponent<PlayerControl>().setMyTurn(true);
     }
 
-    void Update() {
-
+    private void registerPlayer() {
+        GameObject newPlayer = playerManager.CreatePlayer();
+        cameraManager.SetupPlayerCamera(newPlayer);
     }
 }
