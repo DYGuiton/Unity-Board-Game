@@ -8,6 +8,7 @@ public class MapController : MonoBehaviour {
     public Transform MapTransform;
 
     public GameObject tileObject;
+    public List<GameObject> tilePrefabs;
     public List<Tile> tileList;
     public List<Material> tileMaterials;
     public List<Tile> tileTypes;
@@ -116,41 +117,49 @@ public class MapController : MonoBehaviour {
         GameObject nuTile;
 
         foreach (TileBlueprint tileBlueprint in blueprint) {
-            nuTile = Instantiate(tileObject, tileBlueprint.Location, Quaternion.identity);
             switch (tileBlueprint.TileType) {
                 case 0:
+                    nuTile = Instantiate(tilePrefabs[0], tileBlueprint.Location, Quaternion.identity);
                     nuTile.AddComponent<DemonLordCastleTile>();
                     nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[0];
                     break;
                 case 1:
+                    nuTile = Instantiate(tilePrefabs[1], tileBlueprint.Location, Quaternion.identity);
                     nuTile.AddComponent<RoadTile>();
                     nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[1];
                     break;
                 case 2:
+                    nuTile = Instantiate(tilePrefabs[2], tileBlueprint.Location, Quaternion.identity);
                     nuTile.AddComponent<TownTile>();
                     nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[2];
                     break;
                 case 3:
+                    nuTile = Instantiate(tilePrefabs[3], tileBlueprint.Location, Quaternion.identity);
                     nuTile.AddComponent<DrylandTile>();
                     nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[3];
                     break;
                 case 4:
+                    nuTile = Instantiate(tilePrefabs[4], tileBlueprint.Location, Quaternion.identity);
                     nuTile.AddComponent<ForestTile>();
                     nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[4];
                     break;
                 case 5:
+                    nuTile = Instantiate(tilePrefabs[5], tileBlueprint.Location, Quaternion.identity);
                     nuTile.AddComponent<MineTile>();
                     nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[5];
                     break;
                 case 6:
+                    nuTile = Instantiate(tilePrefabs[6], tileBlueprint.Location, Quaternion.identity);
                     nuTile.AddComponent<PlainsTile>();
                     nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[6];
                     break;
                 case 7:
+                    nuTile = Instantiate(tilePrefabs[7], tileBlueprint.Location, Quaternion.identity);
                     nuTile.AddComponent<SeaTile>();
                     nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[7];
                     break;
                 default:
+                    nuTile = Instantiate(tilePrefabs[0], tileBlueprint.Location, Quaternion.identity);
                     nuTile.AddComponent<RoadTile>();
                     nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[1];
                     break;
