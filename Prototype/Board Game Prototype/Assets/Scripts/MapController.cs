@@ -8,6 +8,7 @@ public class MapController : MonoBehaviour {
     public Transform MapTransform;
 
     public GameObject tileObject;
+    public List<GameObject> tilePrefabs;
     public List<Tile> tileList;
     public List<Material> tileMaterials;
     public List<Tile> tileTypes;
@@ -102,6 +103,7 @@ public class MapController : MonoBehaviour {
         foreach (var tileBlueprint in blueprint) {
             if (!tileBlueprint.isMajor_Tile) {
                 tileBlueprint.TileType = random.Next(3, 8);
+                tileBlueprint.rotation = new Vector3(0, random.Next(0, 2) * 180, 0);
             }
         }
     }
@@ -115,44 +117,68 @@ public class MapController : MonoBehaviour {
         tileList = new List<Tile>();
         GameObject nuTile;
 
+
+        /* Tile Types:
+ * 0. Demon Lords Castle
+ * 1. Road
+ * 2. Town
+ * 3. Dryland
+ * 4. Forest
+ * 5. Mine
+ * 6. Plains
+ * 7. Sea
+ *
+ * Major Tile: 0-2
+ * Minor Tiles: 3-7
+ */
         foreach (TileBlueprint tileBlueprint in blueprint) {
-            nuTile = Instantiate(tileObject, tileBlueprint.Location, Quaternion.identity);
             switch (tileBlueprint.TileType) {
+                //Creates a Demon Lord Castle Tile
                 case 0:
+                    nuTile = Instantiate(tilePrefabs[0], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
                     nuTile.AddComponent<DemonLordCastleTile>();
                     nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[0];
                     break;
+                //Creates a Road Tile
                 case 1:
+                    nuTile = Instantiate(tilePrefabs[1], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
                     nuTile.AddComponent<RoadTile>();
-                    nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[1];
                     break;
+                //Creates a Town Tile
                 case 2:
+                    nuTile = Instantiate(tilePrefabs[2], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
                     nuTile.AddComponent<TownTile>();
                     nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[2];
                     break;
+                //Creates a Desert Tile
                 case 3:
+                    nuTile = Instantiate(tilePrefabs[3], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
                     nuTile.AddComponent<DrylandTile>();
-                    nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[3];
                     break;
+                //Creates a Forest Tile
                 case 4:
+                    nuTile = Instantiate(tilePrefabs[4], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
                     nuTile.AddComponent<ForestTile>();
-                    nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[4];
                     break;
+                //Creates a Mountain Tile
                 case 5:
+                    nuTile = Instantiate(tilePrefabs[5], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
                     nuTile.AddComponent<MineTile>();
-                    nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[5];
                     break;
+                //Creates a Plains Tile
                 case 6:
+                    nuTile = Instantiate(tilePrefabs[6], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
                     nuTile.AddComponent<PlainsTile>();
-                    nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[6];
                     break;
+                //Creates a Sea Tile
                 case 7:
+                    nuTile = Instantiate(tilePrefabs[7], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
                     nuTile.AddComponent<SeaTile>();
-                    nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[7];
                     break;
+                //Defaults to creating a Sea Tile
                 default:
+                    nuTile = Instantiate(tilePrefabs[7], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
                     nuTile.AddComponent<RoadTile>();
-                    nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[1];
                     break;
             }
             nuTile.GetComponent<Tile>().copyBlueprint(tileBlueprint);
