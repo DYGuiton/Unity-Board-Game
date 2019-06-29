@@ -266,7 +266,7 @@ MonoBehaviour:
   - {fileID: 8665308767951952440, guid: 0f52c2ca45371ba4ca38bcf593864ddb, type: 3}
   - {fileID: 8665308767951952440, guid: 857fb0b1fe45d9a4ca6e2dcebe818cc6, type: 3}
   - {fileID: 8665308767951952440, guid: 561166e3615d1e042bd0389b3da38094, type: 3}
-  - {fileID: 8665308767951952440, guid: 3cbbdcd1cc8ab38488140ff57dd9f8b4, type: 3}
+  - {fileID: 8665308767951952440, guid: 62d788bf834834949ad04706595d43f0, type: 3}
   tileList: []
   tileMaterials:
   - {fileID: 2100000, guid: 8dafd9abbeed36a4695975819e354a72, type: 2}
@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db8904564d97e3a4189cb1002394f39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSize: 5
+  mapSize: 6
   currentPlayer: {fileID: 0}
   cameraManager:
     cameraHolder: {fileID: 1180598050}

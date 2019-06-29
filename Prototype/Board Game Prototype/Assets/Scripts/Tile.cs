@@ -21,6 +21,7 @@ public class Tile : MonoBehaviour {
     public int Index { get; set; }
     public int TileType { get; set; }
     public Vector3 location { get; set; }
+    public Vector3 rotation { get; set; }
     public bool isMajor_Tile { get; set; }
     public Material material { get; set; }
 
@@ -28,6 +29,7 @@ public class Tile : MonoBehaviour {
         Index = myBlueprint.Index;
         TileType = myBlueprint.TileType;
         location = myBlueprint.Location;
+        rotation = myBlueprint.rotation;
         isMajor_Tile = myBlueprint.isMajor_Tile;
     }
 

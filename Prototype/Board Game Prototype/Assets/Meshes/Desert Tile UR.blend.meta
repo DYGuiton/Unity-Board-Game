@@ -14,7 +14,27 @@ ModelImporter:
     4300000: Base
     7400000: Default Take
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CactusMaterial
+    second: {fileID: 2100000, guid: df3f53c3a671e6d4881d7067d1759b4b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DesertIndicatorMat
+    second: {fileID: 2100000, guid: 40e9854c64cff0a44aab8c0da715c707, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_008
+    second: {fileID: 2100000, guid: 13894241ebb370b4dba79c3375d4df11, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TileBaseMat
+    second: {fileID: 2100000, guid: b10b07b8cb6ab3648be9a96fe82fc7b4, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

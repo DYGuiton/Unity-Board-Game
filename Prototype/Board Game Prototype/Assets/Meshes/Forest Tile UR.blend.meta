@@ -11,12 +11,72 @@ ModelImporter:
     2100006: GrassMat
     2100008: TreeMat0
     2100010: RockMat
+    2100012: ForestTrunkMat
+    2100014: ForestGrassMat
+    2100016: ForestTreeMat0
+    2100018: ForestTreeMat1
+    2100020: ForestRockMat
     2300000: //RootNode
     3300000: //RootNode
     4300000: Base
     7400000: Default Take
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ForestGrassMat
+    second: {fileID: 2100000, guid: 36f93d6e1fbd208459c2f30d7a84b280, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ForestRockMat
+    second: {fileID: 2100000, guid: 0d73dfbe80366684597751b05503e6a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ForestTreeMat0
+    second: {fileID: 2100000, guid: 03c21c7c922700143842ffcef8c3430f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ForestTreeMat1
+    second: {fileID: 2100000, guid: ab5eb00c760d0e74e8b435c643fc0741, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ForestTrunkMat
+    second: {fileID: 2100000, guid: 822df72e4cecb2a41828413e54b72d91, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GrassMat
+    second: {fileID: 2100000, guid: 36f93d6e1fbd208459c2f30d7a84b280, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RockMat
+    second: {fileID: 2100000, guid: 0d73dfbe80366684597751b05503e6a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TileBaseMat
+    second: {fileID: 2100000, guid: b10b07b8cb6ab3648be9a96fe82fc7b4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TreeMat0
+    second: {fileID: 2100000, guid: 03c21c7c922700143842ffcef8c3430f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TreeMat1
+    second: {fileID: 2100000, guid: ab5eb00c760d0e74e8b435c643fc0741, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TrunkMat
+    second: {fileID: 2100000, guid: 822df72e4cecb2a41828413e54b72d91, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

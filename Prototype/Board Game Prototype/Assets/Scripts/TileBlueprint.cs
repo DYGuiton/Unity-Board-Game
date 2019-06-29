@@ -9,6 +9,7 @@ public class TileBlueprint {
     public int Index { get; set; }
     public int TileType { get; set; }
     public Vector3 Location { get; set; }
+    public Vector3 rotation { get; set; }
     public bool isMajor_Tile { get; set; }
 
     public TileBlueprint() {

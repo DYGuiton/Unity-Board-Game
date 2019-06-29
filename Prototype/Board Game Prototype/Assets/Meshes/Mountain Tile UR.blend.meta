@@ -9,12 +9,44 @@ ModelImporter:
     2100002: MountainGrassMat
     2100004: MountainMat
     2100006: SnowMat
+    2100008: TileBaseMat
+    2100010: MountainIndicatorMat
     2300000: //RootNode
     3300000: //RootNode
     4300000: Base
     7400000: Default Take
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_007
+    second: {fileID: 2100000, guid: 0cf939579ed4fa848a3f914ecbf665db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MountainGrassMat
+    second: {fileID: 2100000, guid: 093bebb06bb7f264287bc575169a639e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MountainIndicatorMat
+    second: {fileID: 2100000, guid: 780fd39eb9ae0ec438cc0442d265a4b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MountainMat
+    second: {fileID: 2100000, guid: 8c13d23ba09bf104ebcecf99fb3742e9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SnowMat
+    second: {fileID: 2100000, guid: d06c14fc8890bd54fbb41be950fb85e5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TileBaseMat
+    second: {fileID: 2100000, guid: b10b07b8cb6ab3648be9a96fe82fc7b4, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
