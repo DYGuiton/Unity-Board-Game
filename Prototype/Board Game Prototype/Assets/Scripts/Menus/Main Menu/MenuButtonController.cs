@@ -1,12 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MenuButtonController : MonoBehaviour {
     public int index;
     [SerializeField] bool keyDown;
-    [SerializeField] int maxIndex;
+    [SerializeField] int maxIndex = 0;
     public AudioSource audioSource;
+    public delegate void ButtonPressedCallback(int index);
+    public ButtonPressedCallback buttonPressedCallback = null;
+
 
     void Start() {
         audioSource = GetComponent<AudioSource>();
@@ -39,4 +43,10 @@ public class MenuButtonController : MonoBehaviour {
             keyDown = false;
         }
     }
+
+    public void ButtonPressed(int index) {
+        buttonPressedCallback(index);
+    }
+
+
 }

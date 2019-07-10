@@ -4,24 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour {
+public class TestingMapGameManager : MonoBehaviour {
+    //This is a GameManager script that is only used to expedite testing of the MapScene
 
-    public MapController mapController;
-    public int mapSize {get; set;}
-    public int playerCount { get; set; }
+    MapController mapController;
+    public int mapSize = 10;
+    public int playerCount = 1;
     public GameObject currentPlayer;
     public CameraManager cameraManager;
     public PlayerManager playerManager;
 
     void Start() {
         DontDestroyOnLoad(transform.gameObject);
-        //Set Defaults for the mapSize and playerCount
-        mapSize = 1;
-        playerCount = 1;
-    }
-
-    public void NewGame(Scene scene, LoadSceneMode mode) {
-
         cameraManager.cameraHolder = GameObject.Find("Cameras");
         playerManager.playerHolder = GameObject.Find("Players");
 
@@ -30,7 +24,7 @@ public class GameManager : MonoBehaviour {
         mapController.generateFieldBlueprint(mapSize);
         mapController.generateField();
 
-        for (int i = 0; i < playerCount; i++) {
+        for(int i = 0; i < playerCount; i++) {
             if(i < 4) {
                 registerPlayer();
             }

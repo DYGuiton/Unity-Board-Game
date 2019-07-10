@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6949026301862382361}
   - component: {fileID: 9093165404543933441}
   - component: {fileID: 7093783056947176207}
-  - component: {fileID: 7188791185285273722}
+  - component: {fileID: 7261508414153389751}
   m_Layer: 5
   m_Name: MenuItem
   m_TagString: Untagged
@@ -99,7 +99,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7188791185285273722
+--- !u!114 &7261508414153389751
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,7 +117,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 3
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}

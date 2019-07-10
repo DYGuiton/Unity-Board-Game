@@ -16,7 +16,7 @@ public class MapController : MonoBehaviour {
 
     public Dictionary<string, Transform> childDictionary = new Dictionary<string, Transform>();
 
-    void Start() {
+    public void setMapTransform() {
         foreach (Transform t in transform) {
             childDictionary.Add(t.name, t);
         }
@@ -119,18 +119,18 @@ public class MapController : MonoBehaviour {
 
 
         /* Tile Types:
- * 0. Demon Lords Castle
- * 1. Road
- * 2. Town
- * 3. Dryland
- * 4. Forest
- * 5. Mine
- * 6. Plains
- * 7. Sea
- *
- * Major Tile: 0-2
- * Minor Tiles: 3-7
- */
+        * 0. Demon Lords Castle
+        * 1. Road
+        * 2. Town
+        * 3. Dryland
+        * 4. Forest
+        * 5. Mine
+        * 6. Plains
+        * 7. Sea
+        *
+        * Major Tile: 0-2
+        * Minor Tiles: 3-7
+        */
         foreach (TileBlueprint tileBlueprint in blueprint) {
             switch (tileBlueprint.TileType) {
                 //Creates a Demon Lord Castle Tile
