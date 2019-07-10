@@ -2,7 +2,7 @@
 
 public class CameraController : MonoBehaviour {
 
-    public float panSpeed = 20f;
+    public float panSpeed = 10f;
     public float panBorderThickness = 10f;
     public Vector2 panLimit;
 
@@ -37,5 +37,6 @@ public class CameraController : MonoBehaviour {
         pos.z = Mathf.Clamp(pos.z, -panLimit.y, panLimit.y);
 
         transform.position = pos;
+        panSpeed = pos.y;
     }
 }
