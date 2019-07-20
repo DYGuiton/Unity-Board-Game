@@ -1,0 +1,30 @@
+Unity Board Game Character Types:
+
+	- Mercenary/Freelancer/Sword-For-Hire
+		- Gender: Female
+		- A generalized class
+		- Combat based
+		- Small Sword, no hood, no shield, very light armour
+	
+	- Knight/Swordmaster/Blademaster
+		- Gender: Female
+		- The basic physical combat class
+		- No magic
+		- Big sword, big sheild, heavy armour
+	
+	- Wizard/Mafe/Magus
+		- Gender: Male
+		- The basic magical combat class
+		- No physical
+		- Wand user, robes kinda, maybe a hat
+	
+	- Ranger/Hunter/Archer
+		- Gender: Male
+		- The basic ranger combat class
+		- Bow and arrow, medium armour, small blade on side
+	
+	- Medic/Priest/Anatomist
+		- Gender: Female
+		- The basic healing class
+		- No attacking
+		- small one-handed staff, light armour
