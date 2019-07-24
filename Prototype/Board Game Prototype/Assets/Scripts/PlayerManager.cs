@@ -7,16 +7,18 @@ using System;
 public class PlayerManager {
 
     public GameObject playerHolder;
-    public List<GameObject> playerObjects = new List<GameObject>();
+    public List<GameObject> playerObjectsList = new List<GameObject>();
     public GameObject playerPrefab;
 
-    internal GameObject CreatePlayer() {
+    internal GameObject CreatePlayer(Tile townTile) {
 
         GameObject newPlayer = GameObject.Instantiate(playerPrefab);
+        PlayerControl newPlayerController = newPlayer.transform.Find("PlayerController").GetComponent<PlayerControl>();
+
+        newPlayerController.setTownTile(townTile);
+        playerObjectsList.Add(newPlayer);
+        newPlayerController.id = playerObjectsList.IndexOf(newPlayer);
         newPlayer.transform.SetParent(playerHolder.transform);
-        PlayerControl newController = newPlayer.transform.Find("PlayerController").GetComponent<PlayerControl>();
-        playerObjects.Add(newPlayer);
-        newController.id = playerObjects.IndexOf(newPlayer);
 
         return newPlayer;
     }

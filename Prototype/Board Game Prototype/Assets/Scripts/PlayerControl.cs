@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour {
     public int id { get; set; }
     public Camera viewCamera;
-    TownTile myTown;
+    [SerializeField] private Tile myTownTile { get; set; }
     public GameObject selectedObject;
     public bool myTurn { get; set; }
 
@@ -51,6 +51,14 @@ public class PlayerControl : MonoBehaviour {
 
         if (isMyTurn) {
             onMyTurn(this, new EventArgs());
+        }
+    }
+
+    public void setTownTile(Tile townTile) {
+        if(townTile.GetComponent<TownTile>().myPlayer == null) {
+            myTownTile = townTile;
+        } else {
+            Debug.Log("townTile was already occupied");
         }
     }
 }

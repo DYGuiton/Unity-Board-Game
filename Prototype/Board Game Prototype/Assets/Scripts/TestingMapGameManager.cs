@@ -26,15 +26,15 @@ public class TestingMapGameManager : MonoBehaviour {
 
         for(int i = 0; i < playerCount; i++) {
             if(i < 4) {
-                registerPlayer();
+                registerPlayer(mapController.townTileList[i]);
             }
         }
 
-        playerManager.playerObjects[0].transform.Find("PlayerController").GetComponent<PlayerControl>().setMyTurn(true);
+        playerManager.playerObjectsList[0].transform.Find("PlayerController").GetComponent<PlayerControl>().setMyTurn(true);
     }
 
-    private void registerPlayer() {
-        GameObject newPlayer = playerManager.CreatePlayer();
+    private void registerPlayer(Tile townTile) {
+        GameObject newPlayer = playerManager.CreatePlayer(townTile);
         cameraManager.SetupPlayerCamera(newPlayer);
     }
 }

@@ -26,21 +26,26 @@ public class GameManager : MonoBehaviour {
         playerManager.playerHolder = GameObject.Find("Players");
 
         mapController = GameObject.Find("Map").GetComponent<MapController>();
+
+        //this should be abstracted
+        mapController.playerCount = playerCount;
         mapController.setMapTransform();
         mapController.generateFieldBlueprint(mapSize);
         mapController.generateField();
 
+        //This should be abstracted
         for (int i = 0; i < playerCount; i++) {
             if(i < 4) {
-                registerPlayer();
+                registerPlayer(mapController.townTileList[i]);
             }
         }
 
-        playerManager.playerObjects[0].transform.Find("PlayerController").GetComponent<PlayerControl>().setMyTurn(true);
+        //This should be simplified
+        playerManager.playerObjectsList[0].transform.Find("PlayerController").GetComponent<PlayerControl>().setMyTurn(true);
     }
 
-    private void registerPlayer() {
-        GameObject newPlayer = playerManager.CreatePlayer();
+    private void registerPlayer(Tile townTile) {
+        GameObject newPlayer = playerManager.CreatePlayer(townTile);
         cameraManager.SetupPlayerCamera(newPlayer);
     }
 }
