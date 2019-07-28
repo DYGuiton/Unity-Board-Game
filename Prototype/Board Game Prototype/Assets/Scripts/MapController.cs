@@ -11,9 +11,10 @@ public class MapController : MonoBehaviour {
     public List<GameObject> tilePrefabs;
     public List<Tile> tileList;
     public List<Material> tileMaterials;
-    public List<Tile> tileTypes;
+    public List<Tile> townTileList;
     private List<TileBlueprint> blueprint;
 
+    public int playerCount { get; set; }
     public Dictionary<string, Transform> childDictionary = new Dictionary<string, Transform>();
 
     public void setMapTransform() {
@@ -88,9 +89,10 @@ public class MapController : MonoBehaviour {
         }
 
         //Mark all Town Tile blueprints (Type 2)
+        //Do not mark a Town Tile spot if there isn't a player to account for it
         int[] townTiles = { 0, size - 1, blueprint.Count - size, blueprint.Count - 1 };
-        foreach (int townIndex in townTiles) {
-            blueprint[townIndex].TileType = 2;
+        for (int i = 0; i < playerCount; i++) {
+            blueprint[townTiles[i]].TileType = 2;
         }
 
         //Mark Demon Lord Castle Tile
@@ -148,7 +150,8 @@ public class MapController : MonoBehaviour {
                 case 2:
                     nuTile = Instantiate(tilePrefabs[2], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
                     nuTile.AddComponent<TownTile>();
-                    nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[2];
+                    //nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[2];
+                    townTileList.Add(nuTile.GetComponent<Tile>());
                     break;
                 //Creates a Desert Tile
                 case 3:

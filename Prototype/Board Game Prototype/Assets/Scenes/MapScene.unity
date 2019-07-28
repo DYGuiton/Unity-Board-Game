@@ -129,7 +129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &34586550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,18 +143,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapSize: 6
-  playerCount: 6
+  playerCount: 8
   currentPlayer: {fileID: 0}
   cameraManager:
     cameraHolder: {fileID: 1180598050}
     playerCameraPrefab: {fileID: 5197380800280318561, guid: e001829eb08ec624091d19304a1ae5cb,
       type: 3}
     currentCamera: {fileID: 0}
-  playerManager:
-    playerHolder: {fileID: 106377997}
-    playerObjects: []
-    playerPrefab: {fileID: 7346875382342692595, guid: 00ff78e36f6f15c4eb5bda0c4af26e94,
-      type: 3}
+  playerManager: {fileID: 0}
 --- !u!4 &34586551
 Transform:
   m_ObjectHideFlags: 0
@@ -178,6 +174,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 106377998}
+  - component: {fileID: 106377999}
   m_Layer: 0
   m_Name: Players
   m_TagString: Untagged
@@ -199,6 +196,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &106377999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106377997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f2506841ebb5a944a41a64e71e09656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMaterials:
+  - {fileID: 2100000, guid: 845dcfb2ff33870428cb2b6b8dd9d76c, type: 2}
+  - {fileID: 2100000, guid: 1289dfcc6cb794740a63794027f45172, type: 2}
+  - {fileID: 2100000, guid: 442e3630ecf59a14e83086dbe61ced66, type: 2}
+  - {fileID: 2100000, guid: cb03630f4ec5d4544a869fcdd408d3ad, type: 2}
+  playerObjectsList: []
+  playerPrefab: {fileID: 7346875382342692595, guid: 00ff78e36f6f15c4eb5bda0c4af26e94,
+    type: 3}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,7 +351,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 262fe2cb44589c64981dfd4d3d25c284, type: 2}
   - {fileID: 2100000, guid: f841c626af2410b44818c3443d49854c, type: 2}
   - {fileID: 2100000, guid: 9102c7742b726e84182064d84961b74e, type: 2}
-  tileTypes: []
+  townTileList: []
 --- !u!1 &1180598050
 GameObject:
   m_ObjectHideFlags: 0

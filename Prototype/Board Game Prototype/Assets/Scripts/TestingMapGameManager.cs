@@ -17,24 +17,28 @@ public class TestingMapGameManager : MonoBehaviour {
     void Start() {
         DontDestroyOnLoad(transform.gameObject);
         cameraManager.cameraHolder = GameObject.Find("Cameras");
-        playerManager.playerHolder = GameObject.Find("Players");
 
         mapController = GameObject.Find("Map").GetComponent<MapController>();
+        playerManager = GameObject.Find("Players").GetComponent<PlayerManager>();
+
+        if (playerCount > 4)
+            playerCount = 4;
+        mapController.playerCount = playerCount;
         mapController.setMapTransform();
         mapController.generateFieldBlueprint(mapSize);
         mapController.generateField();
 
-        for(int i = 0; i < playerCount; i++) {
-            if(i < 4) {
-                registerPlayer();
+        for (int i = 0; i < playerCount; i++) {
+            if (i < 4) {
+                registerPlayer(mapController.townTileList[i]);
             }
         }
 
-        playerManager.playerObjects[0].transform.Find("PlayerController").GetComponent<PlayerControl>().setMyTurn(true);
+        playerManager.playerObjectsList[0].transform.Find("PlayerController").GetComponent<PlayerControl>().setMyTurn(true);
     }
 
-    private void registerPlayer() {
-        GameObject newPlayer = playerManager.CreatePlayer();
+    private void registerPlayer(Tile townTile) {
+        GameObject newPlayer = playerManager.CreatePlayer(townTile);
         cameraManager.SetupPlayerCamera(newPlayer);
     }
 }
