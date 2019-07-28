@@ -2,13 +2,13 @@
 
 public class CameraController : MonoBehaviour {
 
-    public float panSpeed = 10f;
-    public float panBorderThickness = 10f;
-    public Vector2 panLimit;
+    float panSpeed = 10f;
+    float panBorderThickness = 10f;
+    Vector2 panLimit = new Vector2 (10, 10);
 
-    public float scrollSpeed = 20f;
-    public float minScrollY = 5f;
-    public float maxScrollY = 50f;
+    float scrollSpeed = 20f;
+    float minScrollY = 2f;
+    float maxScrollY = 50f;
 
     void Update() {
         Vector3 pos = transform.position;
