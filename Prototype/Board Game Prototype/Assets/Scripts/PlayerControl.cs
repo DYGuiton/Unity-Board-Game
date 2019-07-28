@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
     public int id { get; set; }
+    public Material playerMaterial { get; set; }
     public Camera viewCamera;
     [SerializeField] private Tile myTownTile { get; set; }
     public GameObject selectedObject;
@@ -54,9 +55,12 @@ public class PlayerControl : MonoBehaviour {
         }
     }
 
-    public void setTownTile(Tile townTile) {
-        if(townTile.GetComponent<TownTile>().myPlayer == null) {
-            myTownTile = townTile;
+    public void setTownTile(Tile nuTownTile, Material nuPlayerMaterial) {
+        if(nuTownTile.GetComponent<TownTile>().myPlayer == null) {
+            myTownTile = nuTownTile;
+            playerMaterial = nuPlayerMaterial;
+            myTownTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = playerMaterial;
+
         } else {
             Debug.Log("townTile was already occupied");
         }

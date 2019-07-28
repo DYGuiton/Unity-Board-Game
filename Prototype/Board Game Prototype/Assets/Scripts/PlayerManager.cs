@@ -4,21 +4,24 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class PlayerManager {
+public class PlayerManager : MonoBehaviour {
 
-    public GameObject playerHolder;
+    public List<Material> playerMaterials;
+
     public List<GameObject> playerObjectsList = new List<GameObject>();
     public GameObject playerPrefab;
 
-    internal GameObject CreatePlayer(Tile townTile) {
+    internal GameObject CreatePlayer(Tile nuTownTile) {
 
         GameObject newPlayer = GameObject.Instantiate(playerPrefab);
         PlayerControl newPlayerController = newPlayer.transform.Find("PlayerController").GetComponent<PlayerControl>();
 
-        newPlayerController.setTownTile(townTile);
         playerObjectsList.Add(newPlayer);
         newPlayerController.id = playerObjectsList.IndexOf(newPlayer);
-        newPlayer.transform.SetParent(playerHolder.transform);
+
+        newPlayerController.setTownTile(nuTownTile, playerMaterials[newPlayerController.id]);
+
+        newPlayer.transform.SetParent(gameObject.transform);
 
         return newPlayer;
     }

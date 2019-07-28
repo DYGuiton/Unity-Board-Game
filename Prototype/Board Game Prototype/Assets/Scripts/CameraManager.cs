@@ -19,6 +19,7 @@ public class CameraManager {
         GameObject playerCamera = GameObject.Instantiate(playerCameraPrefab);
         playerCamera.transform.SetParent(cameraHolder.transform);
         newPlayer.GetComponentInChildren<PlayerControl>().viewCamera = playerCamera.GetComponent<Camera>();
+        newPlayer.GetComponentInChildren<PlayerControl>().viewCamera.enabled = false;
         newPlayer.transform.Find("PlayerController").GetComponent<PlayerControl>().onMyTurn += CameraManager_onMyTurn;
 
     }

@@ -150,7 +150,7 @@ public class MapController : MonoBehaviour {
                 case 2:
                     nuTile = Instantiate(tilePrefabs[2], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
                     nuTile.AddComponent<TownTile>();
-                    nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[2];
+                    //nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[2];
                     townTileList.Add(nuTile.GetComponent<Tile>());
                     break;
                 //Creates a Desert Tile

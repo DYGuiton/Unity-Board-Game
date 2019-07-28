@@ -23,9 +23,9 @@ public class GameManager : MonoBehaviour {
     public void NewGame(Scene scene, LoadSceneMode mode) {
 
         cameraManager.cameraHolder = GameObject.Find("Cameras");
-        playerManager.playerHolder = GameObject.Find("Players");
 
         mapController = GameObject.Find("Map").GetComponent<MapController>();
+        playerManager = GameObject.Find("Players").GetComponent<PlayerManager>();
 
         //this should be abstracted
         mapController.playerCount = playerCount;
