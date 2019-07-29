@@ -32,24 +32,44 @@ public class PlayerControl : MonoBehaviour {
             Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
+            //Resets the previously selected object to it's original view
+            if (selectedObject != null) {
+                selectedObject.GetComponent<MeshRenderer>().material.shader = selectedObjectShader;
+            }
+
             if (Physics.Raycast(ray, out hit)) {
-
-                //Resets the previously selected object to it's original view
-                if (selectedObject != null) {
-                    selectedObject.GetComponent<MeshRenderer>().material.shader = selectedObjectShader;
+                if(hit.collider.gameObject.GetComponentInParent<Tile>() != null) {
+                    tileSelected(hit.collider.gameObject);
                 }
-
-                //This block of code handles how selection is indicated on an object.
-                //Ultimately this will be made into a callback that gameObjects will individually handle
-                selectedObject = hit.collider.gameObject;
-                selectedObjectShader = selectedObject.GetComponent<MeshRenderer>().material.shader;
-                selectedObject.GetComponent<MeshRenderer>().material.shader = Shader.Find("Outlined/UltimateOutline");
-                selectedObject.GetComponent<MeshRenderer>().material.SetColor("_FirstOutlineColor", new Color(255, 207, 0, 1));
-                selectedObject.GetComponent<MeshRenderer>().material.SetFloat("_FirstOutlineWidth", 0.1f);
-                selectedObject.GetComponent<MeshRenderer>().material.SetColor("_SecondOutlineColor", new Color(255, 207, 0, 0));
-                selectedObject.GetComponent<MeshRenderer>().material.SetFloat("_SecondOutlineWidth", 0.0f);
+                if(hit.collider.gameObject.GetComponentInParent<HeroControl>() != null) {
+                    heroSelected(hit.collider.gameObject);
+                }
             }
         }
+    }
+
+    private void tileSelected(GameObject gameObject) {
+        //This block of code handles how selection is indicated on a tile.
+        //Ultimately this will be made into a callback that gameObjects will individually handle
+        selectedObject = gameObject;
+        selectedObjectShader = selectedObject.GetComponent<MeshRenderer>().material.shader;
+        selectedObject.GetComponent<MeshRenderer>().material.shader = Shader.Find("Outlined/UltimateOutline");
+        selectedObject.GetComponent<MeshRenderer>().material.SetColor("_FirstOutlineColor", new Color(255, 207, 0, 1));
+        selectedObject.GetComponent<MeshRenderer>().material.SetFloat("_FirstOutlineWidth", 0.1f);
+        selectedObject.GetComponent<MeshRenderer>().material.SetColor("_SecondOutlineColor", new Color(255, 207, 0, 0));
+        selectedObject.GetComponent<MeshRenderer>().material.SetFloat("_SecondOutlineWidth", 0.0f);
+    }
+
+    private void heroSelected(GameObject gameObject) {
+        //This block of code handles how selection is indicated on a tile.
+        //Ultimately this will be made into a callback that gameObjects will individually handle
+        selectedObject = gameObject;
+        selectedObjectShader = selectedObject.GetComponent<MeshRenderer>().material.shader;
+        selectedObject.GetComponent<MeshRenderer>().material.shader = Shader.Find("Outlined/UltimateOutline");
+        selectedObject.GetComponent<MeshRenderer>().material.SetColor("_FirstOutlineColor", new Color(0, 255, 255, 1));
+        selectedObject.GetComponent<MeshRenderer>().material.SetFloat("_FirstOutlineWidth", 0.1f);
+        selectedObject.GetComponent<MeshRenderer>().material.SetColor("_SecondOutlineColor", new Color(0, 255, 255, 0));
+        selectedObject.GetComponent<MeshRenderer>().material.SetFloat("_SecondOutlineWidth", 0.0f);
     }
 
     public void setMyTurn(bool isMyTurn) {
