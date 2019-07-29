@@ -37,5 +37,7 @@ public class CameraManager {
         ((PlayerControl)sender).viewCamera.enabled = true;
         ((PlayerControl)sender).viewCamera.GetComponent<AudioListener>().enabled = true;
         currentCamera = ((PlayerControl)sender).viewCamera;
+
+        // Will want to have the camera lookAt the town tile of the character whose turn it is here
     }
 }
