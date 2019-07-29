@@ -7,9 +7,12 @@ public class PlayerControl : MonoBehaviour {
     public int id { get; set; }
     public Material playerMaterial { get; set; }
     public Camera viewCamera;
-    [SerializeField] private Tile myTownTile { get; set; }
+    public Tile townTile { get; set; }
     public GameObject selectedObject;
+    public Shader selectedObjectShader;
     public bool myTurn { get; set; }
+
+    public List<HeroControl> heroControllersList;
 
     public event EventHandler onMyTurn;
 
@@ -33,11 +36,13 @@ public class PlayerControl : MonoBehaviour {
 
                 //Resets the previously selected object to it's original view
                 if (selectedObject != null) {
-                    selectedObject.GetComponent<MeshRenderer>().material.shader = Shader.Find("Standard");
+                    selectedObject.GetComponent<MeshRenderer>().material.shader = selectedObjectShader;
                 }
 
                 //This block of code handles how selection is indicated on an object.
+                //Ultimately this will be made into a callback that gameObjects will individually handle
                 selectedObject = hit.collider.gameObject;
+                selectedObjectShader = selectedObject.GetComponent<MeshRenderer>().material.shader;
                 selectedObject.GetComponent<MeshRenderer>().material.shader = Shader.Find("Outlined/UltimateOutline");
                 selectedObject.GetComponent<MeshRenderer>().material.SetColor("_FirstOutlineColor", new Color(255, 207, 0, 1));
                 selectedObject.GetComponent<MeshRenderer>().material.SetFloat("_FirstOutlineWidth", 0.1f);
@@ -57,12 +62,19 @@ public class PlayerControl : MonoBehaviour {
 
     public void setTownTile(Tile nuTownTile, Material nuPlayerMaterial) {
         if(nuTownTile.GetComponent<TownTile>().myPlayer == null) {
-            myTownTile = nuTownTile;
+            townTile = nuTownTile;
             playerMaterial = nuPlayerMaterial;
-            myTownTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = playerMaterial;
+            townTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = playerMaterial;
 
         } else {
             Debug.Log("townTile was already occupied");
         }
+    }
+
+    public void addHero(HeroControl hero) {
+        hero.setMaterial(playerMaterial);
+        heroControllersList.Add(hero);
+        hero.transform.position = townTile.transform.position;
+
     }
 }

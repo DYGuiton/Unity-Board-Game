@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour {
 
     public List<GameObject> playerObjectsList = new List<GameObject>();
     public GameObject playerPrefab;
+    public GameObject heroPrefab;
 
     internal GameObject CreatePlayer(Tile nuTownTile) {
 
@@ -23,6 +24,13 @@ public class PlayerManager : MonoBehaviour {
 
         newPlayer.transform.SetParent(gameObject.transform);
 
+        giveHero(newPlayerController);
+
         return newPlayer;
+    }
+
+    private void giveHero(PlayerControl newPlayerController) {
+        GameObject newHero = GameObject.Instantiate(heroPrefab);
+        newPlayerController.addHero(newHero.GetComponent<HeroControl>());
     }
 }
