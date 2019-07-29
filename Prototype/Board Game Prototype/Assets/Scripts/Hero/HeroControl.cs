@@ -6,16 +6,7 @@ public class HeroControl : MonoBehaviour
 {
     public PlayerControl player;
     public Material material;
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
+    public HeroProfile heroProfile { set; get; }
 
     public void setMaterial(Material nuMaterial) {
         gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material = nuMaterial;
