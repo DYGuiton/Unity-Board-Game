@@ -29,8 +29,37 @@ public class PlayerManager : MonoBehaviour {
         return newPlayer;
     }
 
+    //this is nothing but a method to test how heroes will function within the game. 
+    //Players should NOT be given heroes from the playerManager script (I think it should probably be the game manager that does that)
     private void giveHero(PlayerControl newPlayerController) {
         GameObject newHero = GameObject.Instantiate(heroPrefab);
+        newHero.GetComponent<HeroControl>().heroProfile = new HeroProfile(createRandomHeroType());
         newPlayerController.addHero(newHero.GetComponent<HeroControl>());
+    }
+
+    private HeroType createRandomHeroType() {
+        System.Random dice = new System.Random();
+        HeroType heroType;
+        switch(dice.Next(0, 4)) {
+            case 0:
+                heroType = new AnatomistHeroType();
+                break;
+            case 1:
+                heroType = new KnightHeroType();
+                break;
+            case 2:
+                heroType = new MagusHeroType();
+                break;
+            case 3:
+                heroType = new MercenaryHeroType();
+                break;
+            case 4:
+                heroType = new RangerHeroType();
+                break;
+            default:
+                heroType = new AnatomistHeroType();
+                break;
+        }
+        return heroType;
     }
 }
