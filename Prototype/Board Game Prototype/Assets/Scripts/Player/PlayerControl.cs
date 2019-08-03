@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerControl : MonoBehaviour {
     public int id { get; set; }
@@ -11,6 +12,8 @@ public class PlayerControl : MonoBehaviour {
     public GameObject selectedObject;
     public Shader selectedObjectShader;
     public bool myTurn { get; set; }
+
+    public PlayerUIControl playerUIControl;
 
     public List<HeroControl> heroControllersList;
 
@@ -27,6 +30,10 @@ public class PlayerControl : MonoBehaviour {
     private void handleUserInterfacing() {
         if (!myTurn)
             return;
+
+        if (EventSystem.current.IsPointerOverGameObject()) {
+            return;
+        }
 
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
             Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
@@ -50,7 +57,7 @@ public class PlayerControl : MonoBehaviour {
 
     private void tileSelected(GameObject gameObject) {
         //This block of code handles how selection is indicated on a tile.
-        //Ultimately this will be made into a callback that gameObjects will individually handle
+        //Ultimately this will be moved into a selectionManager class
         selectedObject = gameObject;
         selectedObjectShader = selectedObject.GetComponent<MeshRenderer>().material.shader;
         selectedObject.GetComponent<MeshRenderer>().material.shader = Shader.Find("Outlined/UltimateOutline");
@@ -62,7 +69,7 @@ public class PlayerControl : MonoBehaviour {
 
     private void heroSelected(GameObject gameObject) {
         //This block of code handles how selection is indicated on a tile.
-        //Ultimately this will be made into a callback that gameObjects will individually handle
+        //Ultimately this will be moved into a selectionManager class
         selectedObject = gameObject;
         selectedObjectShader = selectedObject.GetComponent<MeshRenderer>().material.shader;
         selectedObject.GetComponent<MeshRenderer>().material.shader = Shader.Find("Outlined/UltimateOutline");
@@ -77,6 +84,9 @@ public class PlayerControl : MonoBehaviour {
 
         if (isMyTurn) {
             onMyTurn(this, new EventArgs());
+            playerUIControl.TurnOn();
+        } else {
+            playerUIControl.gameObject.SetActive(false);
         }
     }
 

@@ -12,20 +12,28 @@ public class GameManager : MonoBehaviour {
     public GameObject currentPlayer;
     public CameraManager cameraManager;
     public PlayerManager playerManager;
+    public UserInterfaceManager userInterfaceManager;
+
+    private void Awake() {
+        DontDestroyOnLoad(transform.gameObject);
+    }
 
     void Start() {
-        DontDestroyOnLoad(transform.gameObject);
         //Set Defaults for the mapSize and playerCount
         mapSize = 1;
         playerCount = 1;
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    public void NewGame(Scene scene, LoadSceneMode mode) {
+    public void NewGame() { 
 
         cameraManager.cameraHolder = GameObject.Find("Cameras");
 
+
         mapController = GameObject.Find("Map").GetComponent<MapController>();
         playerManager = GameObject.Find("Players").GetComponent<PlayerManager>();
+        userInterfaceManager = GameObject.Find("UserInterface").GetComponent<UserInterfaceManager>();
 
         //this should be abstracted
         mapController.playerCount = playerCount;
@@ -47,5 +55,16 @@ public class GameManager : MonoBehaviour {
     private void registerPlayer(Tile townTile) {
         GameObject newPlayer = playerManager.CreatePlayer(townTile);
         cameraManager.SetupPlayerCamera(newPlayer);
+        userInterfaceManager.SetupPlayerUI(newPlayer);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode aMode) {
+        if(SceneManager.GetActiveScene().buildIndex == 1) {
+            NewGame();
+        }
+    }
+
+    public void OnDestroy() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

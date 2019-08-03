@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class PlayerManager : MonoBehaviour {
+public class PlayerManager : MonoBehaviour{
 
     public List<Material> playerMaterials;
 
@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour {
 
     internal GameObject CreatePlayer(Tile nuTownTile) {
 
-        GameObject newPlayer = GameObject.Instantiate(playerPrefab);
+        GameObject newPlayer = Instantiate(playerPrefab);
         PlayerControl newPlayerController = newPlayer.transform.Find("PlayerController").GetComponent<PlayerControl>();
 
         playerObjectsList.Add(newPlayer);
