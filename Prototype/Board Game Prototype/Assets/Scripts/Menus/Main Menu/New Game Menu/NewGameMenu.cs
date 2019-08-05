@@ -22,10 +22,8 @@ public class NewGameMenu : Menu {
 
     private void StartGame(int nuMapSize) {
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager.mapSize = nuMapSize;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
-        gameManager.mapSize = nuMapSize;
-        SceneManager.sceneLoaded += gameManager.NewGame;
     }
 }
