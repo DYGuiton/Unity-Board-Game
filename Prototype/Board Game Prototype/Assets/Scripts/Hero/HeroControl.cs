@@ -9,6 +9,7 @@ public class HeroControl : MonoBehaviour
     public HeroProfile heroProfile { set; get; }
 
     public void setMaterial(Material nuMaterial) {
+        material = nuMaterial;
         gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material = nuMaterial;
     }
 }

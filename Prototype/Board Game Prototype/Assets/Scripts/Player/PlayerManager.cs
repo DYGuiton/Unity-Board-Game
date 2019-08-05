@@ -12,6 +12,8 @@ public class PlayerManager : MonoBehaviour{
     public GameObject playerPrefab;
     public GameObject heroPrefab;
 
+    //public Dictionary
+
     internal GameObject CreatePlayer(Tile nuTownTile) {
 
         GameObject newPlayer = Instantiate(playerPrefab);

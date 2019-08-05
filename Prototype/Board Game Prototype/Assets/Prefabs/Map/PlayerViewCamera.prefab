@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5197380800280318565}
   m_Layer: 0
   m_Name: PlayerViewCamera
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,9 +96,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2469b0e1bc522f144befb1e9d39f4f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panSpeed: 10
-  panBorderThickness: 10
-  panLimit: {x: 10, y: 10}
-  scrollSpeed: 10
-  minScrollY: 5
-  maxScrollY: 50

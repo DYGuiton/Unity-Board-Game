@@ -2897,6 +2897,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNameLabel: {fileID: 3828818380541541177}
+  selectedObject: {fileID: 0}
+  bottomRightUI: {fileID: 3828818380267007203}
 --- !u!1 &3828818380267007203
 GameObject:
   m_ObjectHideFlags: 0
