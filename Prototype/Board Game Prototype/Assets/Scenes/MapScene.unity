@@ -478,9 +478,9 @@ MonoBehaviour:
   tileObject: {fileID: 8665308767951952440, guid: 3cbbdcd1cc8ab38488140ff57dd9f8b4,
     type: 3}
   tilePrefabs:
-  - {fileID: 8665308767951952440, guid: 3cbbdcd1cc8ab38488140ff57dd9f8b4, type: 3}
-  - {fileID: 8665308767951952440, guid: 3cbbdcd1cc8ab38488140ff57dd9f8b4, type: 3}
-  - {fileID: 8665308767951952440, guid: 3cbbdcd1cc8ab38488140ff57dd9f8b4, type: 3}
+  - {fileID: 8665308767951952440, guid: e8f4e47008d92774e9540bb17da64960, type: 3}
+  - {fileID: 8665308767951952440, guid: fafb41db302b5a841a2b14d9b9d35e95, type: 3}
+  - {fileID: 8665308767951952440, guid: 896ece425e96072439f62993b5248324, type: 3}
   - {fileID: 8665308767951952440, guid: bfb5b83e51304224e93c7279b76992e8, type: 3}
   - {fileID: 8665308767951952440, guid: 0f52c2ca45371ba4ca38bcf593864ddb, type: 3}
   - {fileID: 8665308767951952440, guid: 857fb0b1fe45d9a4ca6e2dcebe818cc6, type: 3}

@@ -24,7 +24,7 @@ public class MapController : MonoBehaviour {
         childDictionary.TryGetValue("Tiles", out MapTransform);
     }
 
-    public void generateFieldBlueprint(int size) {
+    public void GenerateFieldBlueprint(int size) {
         blueprint = new List<TileBlueprint>();
         int largestLine = size * 2 - 1;
         int length = largestLine;
@@ -32,7 +32,10 @@ public class MapController : MonoBehaviour {
 
         //generate blueprints for center line Tiles
         for (int i = 0; i < largestLine; i++) {
-            blueprint.Add(new TileBlueprint(new Vector3(0, 0, i * 2)));
+            TileBlueprint tileBlueprint = new TileBlueprint(new Vector3(0, 0, i * 2));
+            tileBlueprint.rowLength = largestLine;
+            blueprint.Add(tileBlueprint);
+
         }
 
         //generate blueprints for all outer line Tiles
@@ -40,8 +43,11 @@ public class MapController : MonoBehaviour {
             length--;
             layer++;
             for (int j = 0; j < length; j++) {
-                blueprint.Add(new TileBlueprint(new Vector3(i * 1.50f, 0, 2 * j + layer)));
-                blueprint.Add(new TileBlueprint(new Vector3(-i * 1.50f, 0, 2 * j + layer)));
+                TileBlueprint tileBlueprint0 = new TileBlueprint(new Vector3(i * 1.50f, 0, 2 * j + layer));
+                TileBlueprint tileBlueprint1 = new TileBlueprint(new Vector3(-i * 1.50f, 0, 2 * j + layer));
+                tileBlueprint0.rowLength = tileBlueprint1.rowLength = length;
+                blueprint.Add(tileBlueprint0);
+                blueprint.Add(tileBlueprint1);
             }
         }
 
@@ -110,7 +116,7 @@ public class MapController : MonoBehaviour {
         }
     }
 
-    public void generateField() {
+    public void GenerateFieldFromBlueprint() {
         if (blueprint == null) {
             Debug.Log("No blueprint to go off of.");
             return;
@@ -138,50 +144,39 @@ public class MapController : MonoBehaviour {
                 //Creates a Demon Lord Castle Tile
                 case 0:
                     nuTile = Instantiate(tilePrefabs[0], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
-                    nuTile.AddComponent<DemonLordCastleTile>();
-                    nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[0];
                     break;
                 //Creates a Road Tile
                 case 1:
                     nuTile = Instantiate(tilePrefabs[1], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
-                    nuTile.AddComponent<RoadTile>();
                     break;
                 //Creates a Town Tile
                 case 2:
                     nuTile = Instantiate(tilePrefabs[2], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
-                    nuTile.AddComponent<TownTile>();
-                    //nuTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = tileMaterials[2];
                     townTileList.Add(nuTile.GetComponent<Tile>());
                     break;
                 //Creates a Desert Tile
                 case 3:
                     nuTile = Instantiate(tilePrefabs[3], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
-                    nuTile.AddComponent<DrylandTile>();
                     break;
                 //Creates a Forest Tile
                 case 4:
                     nuTile = Instantiate(tilePrefabs[4], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
-                    nuTile.AddComponent<ForestTile>();
                     break;
                 //Creates a Mountain Tile
                 case 5:
                     nuTile = Instantiate(tilePrefabs[5], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
-                    nuTile.AddComponent<MineTile>();
                     break;
                 //Creates a Plains Tile
                 case 6:
                     nuTile = Instantiate(tilePrefabs[6], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
-                    nuTile.AddComponent<PlainsTile>();
                     break;
                 //Creates a Sea Tile
                 case 7:
                     nuTile = Instantiate(tilePrefabs[7], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
-                    nuTile.AddComponent<SeaTile>();
                     break;
                 //Defaults to creating a Sea Tile
                 default:
                     nuTile = Instantiate(tilePrefabs[7], tileBlueprint.Location, Quaternion.identity * Quaternion.Euler(tileBlueprint.rotation));
-                    nuTile.AddComponent<RoadTile>();
                     break;
             }
             nuTile.GetComponent<Tile>().copyBlueprint(tileBlueprint);
@@ -189,6 +184,13 @@ public class MapController : MonoBehaviour {
             nuTile.transform.SetParent(MapTransform);
             tileList.Add(nuTile.GetComponent<Tile>());
         }
+        SetAllTileNighbours();
 
+    }
+
+    private void SetAllTileNighbours() {
+        foreach (var tile in tileList) {
+            tile.setNeighboursList(tileList);
+        }
     }
 }

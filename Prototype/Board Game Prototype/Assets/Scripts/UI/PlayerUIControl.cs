@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,10 +11,15 @@ public class PlayerUIControl : MonoBehaviour
     public GameObject selectedObject;
     public GameObject bottomRightUI;
 
+    public delegate void MoveButtonDelegate(GameObject selectedHero);
+    public event MoveButtonDelegate moveHero;
+
+    private void Update() {
+    }
+
     public void Setup(GameObject newPlayer) {
         playerNameLabel.GetComponent<TextMeshProUGUI>().text = newPlayer.name;
         gameObject.SetActive(false);
-
 
     }
 
@@ -21,6 +27,8 @@ public class PlayerUIControl : MonoBehaviour
         gameObject.SetActive(true);
         //close all superfluous things
     }
+
+    #region SelectionHandling
 
     public void HeroSelected(HeroControl hero, bool isMyHero) {
         selectedObject = hero.gameObject;
@@ -38,8 +46,6 @@ public class PlayerUIControl : MonoBehaviour
 
         InfoMenu.transform.Find("SelectedName").Find("SelectedNameText").gameObject.GetComponent<TextMeshProUGUI>().text = "Hero";
         InfoMenu.transform.Find("SelectedDescription").Find("SelectedDescriptionText").gameObject.GetComponent<TextMeshProUGUI>().text = hero.material.name;
-
-
     }
 
     public void HeroDeselected(HeroControl hero) {
@@ -95,4 +101,16 @@ public class PlayerUIControl : MonoBehaviour
 
         selectedObject = null;
     }
+
+    #endregion
+
+    #region Events
+
+    public void onMoveButtonClicked() {
+        if(selectedObject.GetComponent<HeroControl>() != null) {
+            moveHero(selectedObject);
+        }
+    }
+
+    #endregion
 }

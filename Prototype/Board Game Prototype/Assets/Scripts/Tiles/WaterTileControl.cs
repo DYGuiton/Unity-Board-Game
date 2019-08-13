@@ -3,6 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-internal class PlainsTile : Tile {
+internal class WaterTileControl : Tile {
 
 }

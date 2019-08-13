@@ -3,6 +3,5 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-internal class MineTile : Tile {
-
+internal class RoadTileControl : Tile {
 }

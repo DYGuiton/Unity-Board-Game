@@ -38,8 +38,8 @@ public class GameManager : MonoBehaviour {
         //this should be abstracted
         mapController.playerCount = playerCount;
         mapController.setMapTransform();
-        mapController.generateFieldBlueprint(mapSize);
-        mapController.generateField();
+        mapController.GenerateFieldBlueprint(mapSize);
+        mapController.GenerateFieldFromBlueprint();
 
         //This should be abstracted
         for (int i = 0; i < playerCount; i++) {

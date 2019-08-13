@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class TileBlueprint {
     public int Index { get; set; }
+    public int rowLength { get; set; }
     public int TileType { get; set; }
     public Vector3 Location { get; set; }
     public Vector3 rotation { get; set; }

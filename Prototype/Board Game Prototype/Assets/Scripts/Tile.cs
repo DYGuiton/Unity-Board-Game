@@ -20,17 +20,46 @@ public class Tile : MonoBehaviour {
 
     public int Index { get; set; }
     public int TileType { get; set; }
+    public int rowLength { get; set; }
     public Vector3 location { get; set; }
     public Vector3 rotation { get; set; }
     public bool isMajor_Tile { get; set; }
-    public Material material { get; set; }
+    public Material originalMaterial;
+
+    public List<Tile> neighbours = new List<Tile>();
 
     public void copyBlueprint(TileBlueprint myBlueprint) {
         Index = myBlueprint.Index;
         TileType = myBlueprint.TileType;
+        rowLength = myBlueprint.rowLength;
         location = myBlueprint.Location;
         rotation = myBlueprint.rotation;
         isMajor_Tile = myBlueprint.isMajor_Tile;
+        originalMaterial = new Material(transform.GetComponentInChildren<MeshRenderer>().material);
+    }
+
+    public void setNeighboursList(List<Tile> tileList) {
+        int[] neighbourIndeces = { Index - rowLength, Index - rowLength + 1, Index - 1, Index + 1, Index + rowLength, Index + rowLength + 1 };
+        for (int i = 0; i < neighbourIndeces.Length; i++) {
+            if (neighbourIndeces[i] >= 0 && neighbourIndeces[i] < tileList.Count) {
+                neighbours.Add(tileList[neighbourIndeces[i]]);
+
+            }
+        }
+
+    }
+
+    public void Highlight() {
+        Material highlightTileMaterial = gameObject.GetComponentInChildren<MeshRenderer>().material;
+        highlightTileMaterial.shader = Shader.Find("Outlined/UltimateOutline");
+        highlightTileMaterial.SetColor("_FirstOutlineColor", new Color(255, 207, 0, 1));
+        highlightTileMaterial.SetFloat("_FirstOutlineWidth", 0.1f);
+        highlightTileMaterial.SetColor("_SecondOutlineColor", new Color(255, 207, 0, 0));
+        highlightTileMaterial.SetFloat("_SecondOutlineWidth", 0.0f);
+    }
+
+    public void Unhighlight() {
+        gameObject.GetComponentInChildren<MeshRenderer>().material = originalMaterial;
     }
 
 }
