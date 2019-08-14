@@ -40,6 +40,7 @@ public class TestingGameManager : MonoBehaviour {
         mapController.setMapTransform();
         mapController.GenerateFieldBlueprint(mapSize);
         mapController.GenerateFieldFromBlueprint();
+        mapController.GenerateFieldBlueprintRevamp(mapSize);
 
         //This should be abstracted
         for (int i = 0; i < playerCount; i++) {

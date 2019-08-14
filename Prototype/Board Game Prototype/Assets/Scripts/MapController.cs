@@ -14,6 +14,8 @@ public class MapController : MonoBehaviour {
     public List<Tile> townTileList;
     private List<TileBlueprint> blueprint;
 
+    public HashSet<TileBlueprint> tileBlueprintSet = new HashSet<TileBlueprint>();
+
     public int playerCount { get; set; }
     public Dictionary<string, Transform> childDictionary = new Dictionary<string, Transform>();
 
@@ -22,6 +24,21 @@ public class MapController : MonoBehaviour {
             childDictionary.Add(t.name, t);
         }
         childDictionary.TryGetValue("Tiles", out MapTransform);
+    }
+
+    public void GenerateFieldBlueprintRevamp(int size) {
+        int radius = size;
+        Debug.Log(radius);
+        for (int q = -radius; q <= radius; q++) {
+            int r1 = Math.Max(-radius, -q - radius);
+            int r2 = Math.Min(radius, -q + radius);
+            for (int r = r1; r <= r2; r++) {
+                tileBlueprintSet.Add(new TileBlueprint(q, r, -q - r));
+            }
+        }
+        foreach(TileBlueprint b in tileBlueprintSet) {
+            Debug.Log(b.q + ", " + b.r + ", " + b.s);
+        }
     }
 
     public void GenerateFieldBlueprint(int size) {

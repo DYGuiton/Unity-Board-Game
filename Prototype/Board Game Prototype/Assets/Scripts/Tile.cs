@@ -26,6 +26,8 @@ public class Tile : MonoBehaviour {
     public bool isMajor_Tile { get; set; }
     public Material originalMaterial;
 
+    public int q, r, s;
+
     public List<Tile> neighbours = new List<Tile>();
 
     public void copyBlueprint(TileBlueprint myBlueprint) {
@@ -37,6 +39,20 @@ public class Tile : MonoBehaviour {
         isMajor_Tile = myBlueprint.isMajor_Tile;
         originalMaterial = new Material(transform.GetComponentInChildren<MeshRenderer>().material);
     }
+
+    public void SetCubeCoordinates(int q, int r, int s) {
+        this.q = q;
+        this.r = r;
+        this.s = s;
+        if (q + r + s != 0) throw new ArgumentException("q + r+ s must be 0");
+    }
+
+    public void SetAxialCoordinates(int q, int r) {
+        this.q = q;
+        this.r = r;
+        s = (-q - r);
+    }
+
 
     public void setNeighboursList(List<Tile> tileList) {
         int[] neighbourIndeces = { Index - rowLength, Index - rowLength + 1, Index - 1, Index + 1, Index + rowLength, Index + rowLength + 1 };
