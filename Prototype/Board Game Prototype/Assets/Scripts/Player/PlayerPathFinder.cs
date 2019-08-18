@@ -7,8 +7,8 @@ using UnityEngine.EventSystems;
 public class PlayerPathFinder : MonoBehaviour {
 
 
-    private GameObject currentMouseOverObject;
-    List<Tile> currentPath = new List<Tile>();
+    public GameObject currentMouseOverObject;
+    public List<Tile> currentPath = new List<Tile>();
     // Start is called before the first frame update
     void Start() {
 
@@ -17,6 +17,11 @@ public class PlayerPathFinder : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
+    }
+
+    public List<Tile> pathSelected() {
+        UnhighlightPath();
+        return currentPath;
     }
 
     public void PathFindForHero(HeroControl movingHero, Camera viewCamera) {
@@ -70,7 +75,12 @@ public class PlayerPathFinder : MonoBehaviour {
         //Depth First Search the Tile Map to find the shortest path
         while (dfsQueue.Count != 0) {
             Tile currentTile = dfsQueue.Dequeue();
-            foreach (Tile childTile in currentTile.neighbours) {
+            if(currentTile == destinationTile) {
+                shortestPath.Add(currentTile);
+                return shortestPath;
+            }
+
+            foreach (Tile childTile in currentTile.neighbors) {
                 if (childTile == destinationTile) {
                     shortestPath.Add(childTile);
                     Tile parentTile = currentTile;

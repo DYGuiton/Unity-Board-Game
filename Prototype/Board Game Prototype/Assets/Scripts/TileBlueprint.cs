@@ -20,16 +20,26 @@ public class TileBlueprint {
         this.r = r;
         this.s = s;
         if (q + r + s != 0) throw new ArgumentException("q + r + s must be 0");
+        SetPixelLocation();
     }
 
     public TileBlueprint(int q, int r) {
         this.q = q;
         this.r = r;
         s = (-q - r);
+        SetPixelLocation();
     }
 
     public TileBlueprint(Vector3 location) {
         this.Location = location;
+    }
+
+    private void SetPixelLocation() {
+        float x = q * 1.5f;
+        float z = -s+r;
+        Location = new Vector3(x, 0, z);
+
+
     }
 
 }

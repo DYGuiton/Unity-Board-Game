@@ -13,6 +13,9 @@ public class HeroControl : MonoBehaviour {
     public Tile currentTile;
 
     public GameObject destination;
+    public List<Tile> destinationPath;
+    public int destinationPathIndex = 0;
+
     public bool moving = false;
 
     public void Update() {
@@ -22,25 +25,39 @@ public class HeroControl : MonoBehaviour {
 
     private void HandleMovement() {
         if (moving) {
-            var offset = destination.transform.position - transform.position;
-            if (offset.magnitude > 0.1) {
-                var controller = gameObject.GetComponentInChildren<CharacterController>();
-                float vSpeed = 0;
-                offset = offset.normalized * speed;
-                offset.y = 0f;
-                if (controller.isGrounded) {
-                    vSpeed = 0;
-                }
-                vSpeed -= gravity;
-                offset.y = vSpeed;
+            if (currentTile != destinationPath[0]) {
+                var offset = destination.transform.position - transform.position;
+                var xOffset = Math.Abs(destination.transform.position.x - transform.position.x);
+                var zOffset = Math.Abs(destination.transform.position.z - transform.position.z);
+                if (xOffset > 0.1 || zOffset > 0.1) {
+                    var controller = gameObject.GetComponentInChildren<CharacterController>();
+                    float vSpeed = 0;
+                    offset = offset.normalized * speed;
+                    offset.y = 0f;
+                    if (controller.isGrounded) {
+                        vSpeed = 0;
+                    }
+                    vSpeed -= gravity;
+                    offset.y = vSpeed;
 
-                controller.Move(offset * Time.deltaTime);
-                Debug.Log(offset * Time.deltaTime);
-                Debug.Log(gameObject.GetComponentInChildren<CharacterController>().velocity);
+                    controller.Move(offset * Time.deltaTime);
+                    Debug.Log("xOffset = " + xOffset + ", zOffset = " + zOffset + ", offset mag = " + offset.magnitude);
+                }
+                else {
+                    Debug.Log("Success!");
+                    Debug.Log("Final Results: xOffset = " + xOffset + ", zOffset = " + zOffset + ", offset mag = " + offset.magnitude);
+                    currentTile = destination.GetComponent<Tile>();
+                    if (destinationPathIndex > 0) {
+                        destinationPathIndex--;
+                        destination = destinationPath[destinationPathIndex].gameObject;
+                    }
+                }
             }
             else {
-                moving = !moving;
+                moving = false;
+                destinationPathIndex = 0;
                 destination = null;
+                destinationPath = null;
             }
         }
     }
@@ -50,8 +67,10 @@ public class HeroControl : MonoBehaviour {
         gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material = nuMaterial;
     }
 
-    public void MoveToTile(GameObject destinationTile) {
+    public void MoveHeroAlongPath(List<Tile> movePath) {
         moving = true;
-        destination = destinationTile;
+        destinationPathIndex = movePath.Count - 1;
+        destinationPath = movePath;
+        destination = movePath[movePath.Count - 1].gameObject;
     }
 }

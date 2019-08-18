@@ -26,9 +26,10 @@ public class Tile : MonoBehaviour {
     public bool isMajor_Tile { get; set; }
     public Material originalMaterial;
 
-    public int q, r, s;
+    public Vector3 cubeCoordinates;
+    int q, r, s;
 
-    public List<Tile> neighbours = new List<Tile>();
+    public List<Tile> neighbors = new List<Tile>();
 
     public void copyBlueprint(TileBlueprint myBlueprint) {
         Index = myBlueprint.Index;
@@ -38,6 +39,8 @@ public class Tile : MonoBehaviour {
         rotation = myBlueprint.rotation;
         isMajor_Tile = myBlueprint.isMajor_Tile;
         originalMaterial = new Material(transform.GetComponentInChildren<MeshRenderer>().material);
+        SetCubeCoordinates(myBlueprint.q, myBlueprint.r, myBlueprint.s);
+
     }
 
     public void SetCubeCoordinates(int q, int r, int s) {
@@ -45,6 +48,7 @@ public class Tile : MonoBehaviour {
         this.r = r;
         this.s = s;
         if (q + r + s != 0) throw new ArgumentException("q + r+ s must be 0");
+        cubeCoordinates = new Vector3(q, r, s);
     }
 
     public void SetAxialCoordinates(int q, int r) {
@@ -54,15 +58,19 @@ public class Tile : MonoBehaviour {
     }
 
 
-    public void setNeighboursList(List<Tile> tileList) {
-        int[] neighbourIndeces = { Index - rowLength, Index - rowLength + 1, Index - 1, Index + 1, Index + rowLength, Index + rowLength + 1 };
-        for (int i = 0; i < neighbourIndeces.Length; i++) {
-            if (neighbourIndeces[i] >= 0 && neighbourIndeces[i] < tileList.Count) {
-                neighbours.Add(tileList[neighbourIndeces[i]]);
+    public void setNeighboursList(Dictionary<Vector3, Tile> tileCubeCoordinatesMap) {
+        Tile neighbor;
 
+        Vector3[] neighborVectors = {
+            new Vector3(q + 1, r - 1, s + 0), new Vector3(q + 1, r + 0, s - 1), new Vector3(q + 0, r + 1, s - 1),
+            new Vector3(q - 1, r + 1, s + 0), new Vector3(q - 1, r + 0, s + 1), new Vector3(q + 0, r - 1, s + 1)
+        };
+
+        for (int i = 0; i < neighborVectors.Length; i++) {
+            if(tileCubeCoordinatesMap.TryGetValue(neighborVectors[i], out neighbor)) {
+                neighbors.Add(neighbor);
             }
         }
-
     }
 
     public void Highlight() {

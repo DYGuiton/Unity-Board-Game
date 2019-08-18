@@ -46,7 +46,7 @@ public class PlayerControl : MonoBehaviour {
             HeroControl heroControl = movingHero.GetComponent<HeroControl>();
             playerPathFinder.PathFindForHero(movingHero.GetComponent<HeroControl>(), viewCamera);
             if (selectedObject.tag == "Tile") {
-                movingHero.GetComponent<HeroControl>().MoveToTile(selectedObject);
+                heroControl.MoveHeroAlongPath(playerPathFinder.pathSelected());
                 MoveButtonPressed = false;
                 DeselectAll();
             }
