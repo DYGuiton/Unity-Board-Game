@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile : MonoBehaviour {
+public class Tile : BoardObject {
     /* Tile Types:
      * 0. Demon Lords Castle
      * 1. Road
@@ -18,13 +18,10 @@ public class Tile : MonoBehaviour {
      * Minor Tiles: 3-7
      */
 
-    public int Index { get; set; }
-    public int TileType { get; set; }
-    public int rowLength { get; set; }
-    public Vector3 location { get; set; }
-    public Vector3 rotation { get; set; }
-    public bool isMajor_Tile { get; set; }
-    public Material originalMaterial;
+    public int Index;
+    public int TileType;
+    public Vector3 location;
+    public Vector3 rotation;
 
     public Vector3 cubeCoordinates;
     int q, r, s;
@@ -34,20 +31,17 @@ public class Tile : MonoBehaviour {
     public void copyBlueprint(TileBlueprint myBlueprint) {
         Index = myBlueprint.Index;
         TileType = myBlueprint.TileType;
-        rowLength = myBlueprint.rowLength;
         location = myBlueprint.Location;
         rotation = myBlueprint.rotation;
-        isMajor_Tile = myBlueprint.isMajor_Tile;
         originalMaterial = new Material(transform.GetComponentInChildren<MeshRenderer>().material);
         SetCubeCoordinates(myBlueprint.q, myBlueprint.r, myBlueprint.s);
-
     }
 
     public void SetCubeCoordinates(int q, int r, int s) {
         this.q = q;
         this.r = r;
         this.s = s;
-        if (q + r + s != 0) throw new ArgumentException("q + r+ s must be 0");
+        if (q + r + s != 0) throw new ArgumentException("q + r + s must be 0");
         cubeCoordinates = new Vector3(q, r, s);
     }
 
@@ -73,16 +67,23 @@ public class Tile : MonoBehaviour {
         }
     }
 
-    public void Highlight() {
+    public override bool Highlight() {
         Material highlightTileMaterial = gameObject.GetComponentInChildren<MeshRenderer>().material;
         highlightTileMaterial.shader = Shader.Find("Outlined/UltimateOutline");
-        highlightTileMaterial.SetColor("_FirstOutlineColor", new Color(255, 207, 0, 1));
+        highlightTileMaterial.SetColor("_FirstOutlineColor", new Color(1.0f, 1.0f, 0.0f, 1.0f));
         highlightTileMaterial.SetFloat("_FirstOutlineWidth", 0.1f);
-        highlightTileMaterial.SetColor("_SecondOutlineColor", new Color(255, 207, 0, 0));
+        highlightTileMaterial.SetColor("_SecondOutlineColor", new Color(1.0f, 1.0f, 1.0f, 0.0f));
         highlightTileMaterial.SetFloat("_SecondOutlineWidth", 0.0f);
+        return true;
     }
 
-    public void Unhighlight() {
+    public override bool Highlight(Material highlightMaterial) {
+        Material currentTileMaterial = gameObject.GetComponentInChildren<MeshRenderer>().material;
+        currentTileMaterial = highlightMaterial;
+        return true;
+    }
+
+    public override void Unhighlight() {
         gameObject.GetComponentInChildren<MeshRenderer>().material = originalMaterial;
     }
 

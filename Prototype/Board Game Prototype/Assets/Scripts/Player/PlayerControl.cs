@@ -4,27 +4,26 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class PlayerControl : MonoBehaviour {
+
     public int id { get; set; }
     public Material playerMaterial { get; set; }
-    public Camera viewCamera;
     public Tile townTile { get; set; }
-    public GameObject selectedObject;
-    public GameObject movingHero;
-    public Shader selectedObjectShader;
-    public bool myTurn { get; set; }
-    public bool MoveButtonPressed = false;
-
-
-    public PlayerUIControl playerUIControl;
-
-    public PlayerPathFinder playerPathFinder;
-
     public List<HeroControl> heroControllersList;
 
+    public Camera viewCamera;
+    public PlayerUIControl playerUIControl;
+    public PlayerPathFinder playerPathFinder;
     public event EventHandler onMyTurn;
 
+    public GameObject selectedObject;
+    public GameObject movingHero;
+
+    public bool myTurn { get; set; }
+    public bool MoveButtonPressed = false;
+    public bool cancelButtonPressed = false;
+
     void Start() {
-        SubscribeToHeroMovement();
+        SubscribeToPlayerUIEvents();
         playerPathFinder = transform.GetComponentInChildren<PlayerPathFinder>();
     }
 
@@ -32,9 +31,14 @@ public class PlayerControl : MonoBehaviour {
         HandleUserInterfacing();
     }
 
+    #region HandlingCode
+
     private void HandleUserInterfacing() {
         if (!myTurn)
             return;
+        if (cancelButtonPressed) {
+            CancelAll();
+        }
 
         HandlePlayerMovement();
 
@@ -48,12 +52,11 @@ public class PlayerControl : MonoBehaviour {
             if (selectedObject.tag == "Tile") {
                 heroControl.MoveHeroAlongPath(playerPathFinder.pathSelected());
                 MoveButtonPressed = false;
-                DeselectAll();
+                CancelAll();
             }
         }
     }
 
-    #region Selection Handling
     private void HandlePlayerSelection() {
         if (EventSystem.current.IsPointerOverGameObject()) {
             return;
@@ -79,49 +82,41 @@ public class PlayerControl : MonoBehaviour {
         }
     }
 
+    #endregion
+
+    #region Selection Handling
+
     private void TileSelected(GameObject tileMeshObject) {
-        //This block of code handles how selection is indicated on a tile.
-        //Ultimately this will be moved into a selectionManager class
         selectedObject = tileMeshObject.transform.parent.gameObject;
-        selectedObjectShader = selectedObject.GetComponentInChildren<MeshRenderer>().material.shader;
-        selectedObject.GetComponentInChildren<MeshRenderer>().material.shader = Shader.Find("Outlined/UltimateOutline");
-        selectedObject.GetComponentInChildren<MeshRenderer>().material.SetColor("_FirstOutlineColor", new Color(255, 207, 0, 1));
-        selectedObject.GetComponentInChildren<MeshRenderer>().material.SetFloat("_FirstOutlineWidth", 0.1f);
-        selectedObject.GetComponentInChildren<MeshRenderer>().material.SetColor("_SecondOutlineColor", new Color(255, 207, 0, 0));
-        selectedObject.GetComponentInChildren<MeshRenderer>().material.SetFloat("_SecondOutlineWidth", 0.0f);
+        selectedObject.GetComponent<Tile>().Highlight();
 
         playerUIControl.TileSelected(selectedObject.GetComponent<Tile>());
     }
 
     private void HeroSelected(GameObject heroMeshObject) {
-        //This block of code handles how selection is indicated on a tile.
-        //Ultimately this will be moved into a selectionManager class
-        selectedObject = heroMeshObject;
         HeroControl heroControl = heroMeshObject.GetComponent<HeroControl>();
-        selectedObjectShader = selectedObject.GetComponentInChildren<MeshRenderer>().material.shader;
-        selectedObject.GetComponentInChildren<MeshRenderer>().material.shader = Shader.Find("Outlined/UltimateOutline");
-        selectedObject.GetComponentInChildren<MeshRenderer>().material.SetColor("_FirstOutlineColor", new Color(0, 255, 255, 1));
-        selectedObject.GetComponentInChildren<MeshRenderer>().material.SetFloat("_FirstOutlineWidth", 0.1f);
-        selectedObject.GetComponentInChildren<MeshRenderer>().material.SetColor("_SecondOutlineColor", new Color(0, 255, 255, 0));
-        selectedObject.GetComponentInChildren<MeshRenderer>().material.SetFloat("_SecondOutlineWidth", 0.0f);
-
-        bool isMyHero = false;
-        if (heroControllersList.Contains(heroControl)) {
-            isMyHero = true;
+        if (heroControl.Highlight()) {
+            selectedObject = heroMeshObject;
+            bool isMyHero = false;
+            if (heroControllersList.Contains(heroControl)) {
+                isMyHero = true;
+            }
+            playerUIControl.HeroSelected(heroControl, isMyHero);
         }
-        playerUIControl.HeroSelected(heroControl, isMyHero);
-
     }
 
-    private void DeselectAll() {
-        selectedObject.GetComponentInChildren<MeshRenderer>().material.shader = selectedObjectShader;
+
+
+    private void CancelAll() {
+        DeselectSelectedObject();
+        playerPathFinder.Disable();
+        EndEvents();
         movingHero = null;
         selectedObject = null;
-        playerUIControl.Deselection();
     }
 
     private void DeselectSelectedObject() {
-        selectedObject.GetComponentInChildren<MeshRenderer>().material.shader = selectedObjectShader;
+        selectedObject.GetComponent<BoardObject>().Unhighlight();
         selectedObject = null;
         playerUIControl.Deselection();
     }
@@ -154,14 +149,7 @@ public class PlayerControl : MonoBehaviour {
         }
     }
 
-    #endregion
-
-
-    private void SubscribeToHeroMovement() {
-        playerUIControl.moveHero += onMoveHero;
-    }
-
-    public void addHero(HeroControl hero) {
+    public void SetNewHero(HeroControl hero) {
         hero.setMaterial(playerMaterial);
         heroControllersList.Add(hero);
         Vector3 startPosition = townTile.transform.position;
@@ -171,8 +159,28 @@ public class PlayerControl : MonoBehaviour {
         hero.currentTile = townTile;
     }
 
+    #endregion
+
+    #region Event Handling
+
+    private void SubscribeToPlayerUIEvents() {
+        playerUIControl.moveHero += onMoveHero;
+        playerUIControl.cancel += onCancel;
+    }
+
     public void onMoveHero(GameObject selectedHero) {
         movingHero = selectedHero;
         MoveButtonPressed = true;
     }
+
+    public void onCancel() {
+        cancelButtonPressed = true;
+    }
+
+    private void EndEvents() {
+        cancelButtonPressed = false;
+        MoveButtonPressed = false;
+    }
+
+    #endregion
 }

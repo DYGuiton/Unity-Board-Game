@@ -45,8 +45,19 @@ public class PlayerPathFinder : MonoBehaviour {
     }
 
     private void HighlightPath() {
-        foreach (var tile in currentPath) {
-            tile.Highlight();
+        for (int i = 0; i < currentPath.Count; i++) {
+            if(i == 0) {
+                Material specialHighlightMaterial = currentPath[i].GetComponentInChildren<MeshRenderer>().material;
+                specialHighlightMaterial.shader = Shader.Find("Outlined/UltimateOutline");
+                specialHighlightMaterial.SetColor("_FirstOutlineColor", new Color(1.0f, 0.25f, 0f, 1.0f));
+                specialHighlightMaterial.SetFloat("_FirstOutlineWidth", 0.1f);
+                specialHighlightMaterial.SetColor("_SecondOutlineColor", new Color(1.0f, 0.25f, 0f, 1.0f));
+                specialHighlightMaterial.SetFloat("_SecondOutlineWidth", 0.0f);
+                currentPath[i].Highlight(specialHighlightMaterial);
+            }
+            else {
+                currentPath[i].Highlight();
+            }
         }
     }
 
@@ -98,5 +109,9 @@ public class PlayerPathFinder : MonoBehaviour {
             }
         }
         return shortestPath;
+    }
+
+    public void Disable() {
+        UnhighlightPath();
     }
 }

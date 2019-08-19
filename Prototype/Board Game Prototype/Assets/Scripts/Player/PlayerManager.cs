@@ -36,7 +36,7 @@ public class PlayerManager : MonoBehaviour{
     private void giveHero(PlayerControl newPlayerController) {
         GameObject newHero = GameObject.Instantiate(heroPrefab);
         newHero.GetComponent<HeroControl>().heroProfile = new HeroProfile(createRandomHeroType());
-        newPlayerController.addHero(newHero.GetComponent<HeroControl>());
+        newPlayerController.SetNewHero(newHero.GetComponent<HeroControl>());
     }
 
     private HeroType createRandomHeroType() {

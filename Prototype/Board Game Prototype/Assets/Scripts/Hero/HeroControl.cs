@@ -3,13 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroControl : MonoBehaviour {
-    public PlayerControl player;
-    public Material material;
-    public HeroProfile heroProfile { set; get; }
-    public float speed = 2;
-    public float gravity = 9.8f;
-
+public class HeroControl : BoardObject {
+    public HeroProfile heroProfile;
     public Tile currentTile;
 
     public GameObject destination;
@@ -17,14 +12,18 @@ public class HeroControl : MonoBehaviour {
     public int destinationPathIndex = 0;
 
     public bool moving = false;
+    public bool isInteractable = true;
+
+    public float speed = 2;
+    public float gravity = 9.8f;
 
     public void Update() {
         HandleMovement();
-
     }
 
     private void HandleMovement() {
         if (moving) {
+            isInteractable = false;
             if (currentTile != destinationPath[0]) {
                 var offset = destination.transform.position - transform.position;
                 var xOffset = Math.Abs(destination.transform.position.x - transform.position.x);
@@ -41,11 +40,8 @@ public class HeroControl : MonoBehaviour {
                     offset.y = vSpeed;
 
                     controller.Move(offset * Time.deltaTime);
-                    Debug.Log("xOffset = " + xOffset + ", zOffset = " + zOffset + ", offset mag = " + offset.magnitude);
                 }
                 else {
-                    Debug.Log("Success!");
-                    Debug.Log("Final Results: xOffset = " + xOffset + ", zOffset = " + zOffset + ", offset mag = " + offset.magnitude);
                     currentTile = destination.GetComponent<Tile>();
                     if (destinationPathIndex > 0) {
                         destinationPathIndex--;
@@ -55,6 +51,7 @@ public class HeroControl : MonoBehaviour {
             }
             else {
                 moving = false;
+                isInteractable = true;
                 destinationPathIndex = 0;
                 destination = null;
                 destinationPath = null;
@@ -62,9 +59,10 @@ public class HeroControl : MonoBehaviour {
         }
     }
 
-    public void setMaterial(Material nuMaterial) {
-        material = nuMaterial;
-        gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material = nuMaterial;
+    public void setMaterial(Material material) {
+        originalMaterial = new Material(material);
+        gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().material = material;
+
     }
 
     public void MoveHeroAlongPath(List<Tile> movePath) {
@@ -72,5 +70,31 @@ public class HeroControl : MonoBehaviour {
         destinationPathIndex = movePath.Count - 1;
         destinationPath = movePath;
         destination = movePath[movePath.Count - 1].gameObject;
+    }
+
+    public override bool Highlight() {
+        if (isInteractable) {
+            Material tileMaterial = gameObject.GetComponentInChildren<MeshRenderer>().material;
+            tileMaterial.shader = Shader.Find("Outlined/UltimateOutline");
+            tileMaterial.SetColor("_FirstOutlineColor", new Color(0, 255, 255, 1));
+            tileMaterial.SetFloat("_FirstOutlineWidth", 0.1f);
+            tileMaterial.SetColor("_SecondOutlineColor", new Color(0, 255, 255, 0));
+            tileMaterial.SetFloat("_SecondOutlineWidth", 0.0f);
+            return true;
+        }
+        return false;
+    }
+
+    public override bool Highlight(Material highlightMaterial) {
+        if (isInteractable) {
+            Material currentTileMaterial = gameObject.GetComponentInChildren<MeshRenderer>().material;
+            currentTileMaterial = highlightMaterial;
+            return true;
+        }
+        return false;
+    }
+
+    public override void Unhighlight() {
+        gameObject.GetComponentInChildren<MeshRenderer>().material = originalMaterial;
     }
 }

@@ -35,7 +35,6 @@ public class MapController : MonoBehaviour {
         int tileIndex = 0;
         System.Random random = new System.Random();
 
-        Debug.Log(radius);
         for (int q = -radius; q <= radius; q++) {
             int r1 = Math.Max(-radius, -q - radius);
             int r2 = Math.Min(radius, -q + radius);
