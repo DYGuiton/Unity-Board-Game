@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,10 +11,17 @@ public class PlayerUIControl : MonoBehaviour
     public GameObject selectedObject;
     public GameObject bottomRightUI;
 
+    public delegate void MoveButtonDelegate(GameObject selectedHero);
+    public delegate void CancelButtonDelegate();
+    public event MoveButtonDelegate moveHero;
+    public event CancelButtonDelegate cancel;
+
+    private void Update() {
+    }
+
     public void Setup(GameObject newPlayer) {
         playerNameLabel.GetComponent<TextMeshProUGUI>().text = newPlayer.name;
         gameObject.SetActive(false);
-
 
     }
 
@@ -21,6 +29,8 @@ public class PlayerUIControl : MonoBehaviour
         gameObject.SetActive(true);
         //close all superfluous things
     }
+
+    #region SelectionHandling
 
     public void HeroSelected(HeroControl hero, bool isMyHero) {
         selectedObject = hero.gameObject;
@@ -34,12 +44,10 @@ public class PlayerUIControl : MonoBehaviour
         if(isMyHero == true) {
             ActionMenu.transform.Find("MoveButton").gameObject.SetActive(true);
         }
-        ActionMenu.transform.Find("DeselectButton").gameObject.SetActive(true);
+        ActionMenu.transform.Find("CancelButton").gameObject.SetActive(true);
 
         InfoMenu.transform.Find("SelectedName").Find("SelectedNameText").gameObject.GetComponent<TextMeshProUGUI>().text = "Hero";
-        InfoMenu.transform.Find("SelectedDescription").Find("SelectedDescriptionText").gameObject.GetComponent<TextMeshProUGUI>().text = hero.material.name;
-
-
+        InfoMenu.transform.Find("SelectedDescription").Find("SelectedDescriptionText").gameObject.GetComponent<TextMeshProUGUI>().text = hero.originalMaterial.name;
     }
 
     public void HeroDeselected(HeroControl hero) {
@@ -48,7 +56,7 @@ public class PlayerUIControl : MonoBehaviour
 
 
         ActionMenu.transform.Find("MoveButton").gameObject.SetActive(false);
-        ActionMenu.transform.Find("DeselectButton").gameObject.SetActive(false);
+        ActionMenu.transform.Find("CancelButton").gameObject.SetActive(false);
 
         InfoMenu.transform.Find("SelectedName").Find("SelectedNameText").gameObject.GetComponent<TextMeshProUGUI>().text = "";
         InfoMenu.transform.Find("SelectedDescription").Find("SelectedDescriptionText").gameObject.GetComponent<TextMeshProUGUI>().text = "";
@@ -66,7 +74,7 @@ public class PlayerUIControl : MonoBehaviour
         ActionMenu.SetActive(true);
         InfoMenu.SetActive(true);
 
-        ActionMenu.transform.Find("DeselectButton").gameObject.SetActive(true);
+        ActionMenu.transform.Find("CancelButton").gameObject.SetActive(true);
 
         InfoMenu.transform.Find("SelectedName").Find("SelectedNameText").gameObject.GetComponent<TextMeshProUGUI>().text = tile.gameObject.name;
         InfoMenu.transform.Find("SelectedDescription").Find("SelectedDescriptionText").gameObject.GetComponent<TextMeshProUGUI>().text = tile.gameObject.transform.position.ToString();
@@ -76,7 +84,7 @@ public class PlayerUIControl : MonoBehaviour
         GameObject ActionMenu = bottomRightUI.transform.Find("ActionMenuContainer").gameObject;
         GameObject InfoMenu = bottomRightUI.transform.Find("InformationMenuContainer").gameObject;
 
-        ActionMenu.transform.Find("DeselectButton").gameObject.SetActive(false);
+        ActionMenu.transform.Find("CancelButton").gameObject.SetActive(false);
 
         InfoMenu.transform.Find("SelectedName").Find("SelectedNameText").gameObject.GetComponent<TextMeshProUGUI>().text = "";
         InfoMenu.transform.Find("SelectedDescription").Find("SelectedDescriptionText").gameObject.GetComponent<TextMeshProUGUI>().text = "";
@@ -95,4 +103,22 @@ public class PlayerUIControl : MonoBehaviour
 
         selectedObject = null;
     }
+
+    #endregion
+
+    #region Events
+
+    public void onMoveButtonClicked() {
+        if(selectedObject.GetComponent<HeroControl>() != null) {
+            moveHero(selectedObject);
+            GameObject InfoMenu = bottomRightUI.transform.Find("InformationMenuContainer").gameObject;
+            InfoMenu.transform.Find("SelectedDescription").Find("SelectedDescriptionText").gameObject.GetComponent<TextMeshProUGUI>().text = "Move Hero to selected tile.";
+        }
+    }
+
+    public void onCancelButtonClicked() {
+        cancel();
+    }
+
+    #endregion
 }

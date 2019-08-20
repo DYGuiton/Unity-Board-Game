@@ -3,6 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-internal class ForestTile : Tile {
+internal class ForestTileControl : Tile {
 
 }

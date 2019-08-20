@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 3828818378786910982}
   - component: {fileID: 3828818378786910983}
   m_Layer: 0
-  m_Name: DeselectButton
+  m_Name: CancelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -467,7 +467,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3828818378786910982}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3828818380254142032}
+        m_MethodName: onCancelButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &3828818379020277804
@@ -2463,7 +2474,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3828818379955928830}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3828818380254142032}
+        m_MethodName: onMoveButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &3828818379963994547
@@ -2948,7 +2970,7 @@ GameObject:
   - component: {fileID: 3828818380345237160}
   - component: {fileID: 3828818380345237161}
   m_Layer: 0
-  m_Name: DeselectButtonText
+  m_Name: CancelButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

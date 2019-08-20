@@ -23,6 +23,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5226216159057534858}
+  - component: {fileID: 6864715617176606504}
   m_Layer: 0
   m_Name: WaterTile
   m_TagString: Tile
@@ -46,6 +47,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6864715617176606504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665308767951952440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 380451a737d3e0c43a0b28bd9c8ba067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neighbours: []
 --- !u!1001 &55128110261986116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -138,6 +152,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 34cbe5a00dbe4494c8d49ee0a6eed7bc, type: 3}
       propertyPath: m_Name
       value: Tile Top Blank
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 34cbe5a00dbe4494c8d49ee0a6eed7bc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 34cbe5a00dbe4494c8d49ee0a6eed7bc, type: 3}
       propertyPath: m_LocalPosition.x
