@@ -51,6 +51,7 @@ public class MapController : MonoBehaviour {
                 //Designates all town tiles
                 else if (Math.Abs(tileBlueprint.Location.x) == size * 1.5 && Math.Abs(tileBlueprint.Location.z) == size) {
                     tileBlueprint.TileType = 2;
+                    tileBlueprint.rotation = new Vector3(0, random.Next(0, 2) * 180, 0);
                 }
                 //Randomize all other tiles
                 else {

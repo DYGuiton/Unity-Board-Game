@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &34586550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,7 +480,7 @@ MonoBehaviour:
   tilePrefabs:
   - {fileID: 8665308767951952440, guid: e8f4e47008d92774e9540bb17da64960, type: 3}
   - {fileID: 8665308767951952440, guid: fafb41db302b5a841a2b14d9b9d35e95, type: 3}
-  - {fileID: 8665308767951952440, guid: 896ece425e96072439f62993b5248324, type: 3}
+  - {fileID: 2954207730463825685, guid: c7750f54a478f7541a2a7a41b890073e, type: 3}
   - {fileID: 8665308767951952440, guid: bfb5b83e51304224e93c7279b76992e8, type: 3}
   - {fileID: 8665308767951952440, guid: 0f52c2ca45371ba4ca38bcf593864ddb, type: 3}
   - {fileID: 8665308767951952440, guid: 857fb0b1fe45d9a4ca6e2dcebe818cc6, type: 3}
