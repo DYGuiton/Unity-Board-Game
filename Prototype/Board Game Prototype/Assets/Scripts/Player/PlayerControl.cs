@@ -87,7 +87,7 @@ public class PlayerControl : MonoBehaviour {
     #region Selection Handling
 
     private void TileSelected(GameObject tileMeshObject) {
-        selectedObject = tileMeshObject.transform.parent.gameObject;
+        selectedObject = tileMeshObject.transform.parent.parent.gameObject;
         selectedObject.GetComponent<Tile>().Highlight();
 
         playerUIControl.TileSelected(selectedObject.GetComponent<Tile>());
@@ -141,7 +141,8 @@ public class PlayerControl : MonoBehaviour {
         if (nuTownTile.GetComponent<TownTileControl>().myPlayer == null) {
             townTile = nuTownTile;
             playerMaterial = nuPlayerMaterial;
-            townTile.transform.GetChild(0).GetComponent<MeshRenderer>().material = playerMaterial;
+            //townTile.transform.Find("TileBase").GetComponent<MeshRenderer>().material = playerMaterial;
+            townTile.transform.GetChild(0).transform.Find("TileBase").GetComponent<MeshRenderer>().material = playerMaterial;
 
         }
         else {

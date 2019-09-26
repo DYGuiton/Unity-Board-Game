@@ -22,6 +22,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: GrassMaterial
+    second: {fileID: 2100000, guid: cd6ce2061d3523c448b8cf8929e1f277, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: HouseMaterial
     second: {fileID: 2100000, guid: d221bd3d548eaa54e8d0c1d2a8c05e76, type: 2}
   - first:

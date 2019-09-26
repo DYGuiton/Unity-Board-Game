@@ -68,7 +68,7 @@ public class Tile : BoardObject {
     }
 
     public override bool Highlight() {
-        Material highlightTileMaterial = gameObject.GetComponentInChildren<MeshRenderer>().material;
+        Material highlightTileMaterial = transform.GetChild(0).transform.Find("TileBase").GetComponent<MeshRenderer>().material;
         highlightTileMaterial.shader = Shader.Find("Outlined/UltimateOutline");
         highlightTileMaterial.SetColor("_FirstOutlineColor", new Color(1.0f, 1.0f, 0.0f, 1.0f));
         highlightTileMaterial.SetFloat("_FirstOutlineWidth", 0.1f);
@@ -78,13 +78,13 @@ public class Tile : BoardObject {
     }
 
     public override bool Highlight(Material highlightMaterial) {
-        Material currentTileMaterial = gameObject.GetComponentInChildren<MeshRenderer>().material;
+        Material currentTileMaterial = transform.GetChild(0).transform.Find("TileBase").GetComponent<MeshRenderer>().material;
         currentTileMaterial = highlightMaterial;
         return true;
     }
 
     public override void Unhighlight() {
-        gameObject.GetComponentInChildren<MeshRenderer>().material = originalMaterial;
+        transform.GetChild(0).transform.Find("TileBase").GetComponent<MeshRenderer>().material = originalMaterial;
     }
 
 }
