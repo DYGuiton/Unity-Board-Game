@@ -141,8 +141,8 @@ public class PlayerControl : MonoBehaviour {
         if (nuTownTile.GetComponent<TownTileControl>().myPlayer == null) {
             townTile = nuTownTile;
             playerMaterial = nuPlayerMaterial;
-            //townTile.transform.Find("TileBase").GetComponent<MeshRenderer>().material = playerMaterial;
             townTile.transform.GetChild(0).transform.Find("TileBase").GetComponent<MeshRenderer>().material = playerMaterial;
+            townTile.originalMaterial = playerMaterial;
 
         }
         else {
