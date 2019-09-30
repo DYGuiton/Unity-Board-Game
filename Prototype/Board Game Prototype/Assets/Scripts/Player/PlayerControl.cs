@@ -14,6 +14,7 @@ public class PlayerControl : MonoBehaviour {
     public PlayerUIControl playerUIControl;
     public PlayerPathFinder playerPathFinder;
     public event EventHandler onMyTurn;
+    public event EventHandler onPlayerEndTurn;
 
     public GameObject selectedObject;
     public GameObject movingHero;
@@ -21,6 +22,7 @@ public class PlayerControl : MonoBehaviour {
     public bool myTurn { get; set; }
     public bool MoveButtonPressed = false;
     public bool cancelButtonPressed = false;
+    public bool endTurnButtonPressed = false;
 
     void Start() {
         SubscribeToPlayerUIEvents();
@@ -43,6 +45,10 @@ public class PlayerControl : MonoBehaviour {
         HandlePlayerMovement();
 
         HandlePlayerSelection();
+
+        if (endTurnButtonPressed) {
+            setMyTurn(false);
+        }
     }
 
     private void HandlePlayerMovement() {
@@ -116,9 +122,11 @@ public class PlayerControl : MonoBehaviour {
     }
 
     private void DeselectSelectedObject() {
-        selectedObject.GetComponent<BoardObject>().Unhighlight();
-        selectedObject = null;
-        playerUIControl.Deselection();
+        if (selectedObject != null) {
+            selectedObject.GetComponent<BoardObject>().Unhighlight();
+            selectedObject = null;
+            playerUIControl.Deselection();
+        }
     }
 
     #endregion
@@ -133,7 +141,9 @@ public class PlayerControl : MonoBehaviour {
             playerUIControl.TurnOn();
         }
         else {
-            playerUIControl.gameObject.SetActive(false);
+            CancelAll();
+            playerUIControl.TurnOff();
+            onPlayerEndTurn(this, new EventArgs());
         }
     }
 
@@ -167,6 +177,7 @@ public class PlayerControl : MonoBehaviour {
     private void SubscribeToPlayerUIEvents() {
         playerUIControl.moveHero += onMoveHero;
         playerUIControl.cancel += onCancel;
+        playerUIControl.endTurn += onEndTurn;
     }
 
     public void onMoveHero(GameObject selectedHero) {
@@ -178,9 +189,14 @@ public class PlayerControl : MonoBehaviour {
         cancelButtonPressed = true;
     }
 
+    public void onEndTurn() {
+        endTurnButtonPressed = true;
+    }
+
     private void EndEvents() {
         cancelButtonPressed = false;
         MoveButtonPressed = false;
+        endTurnButtonPressed = false;
     }
 
     #endregion

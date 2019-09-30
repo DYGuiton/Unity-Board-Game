@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class PlayerUIControl : MonoBehaviour
-{
+public class PlayerUIControl : MonoBehaviour {
     public GameObject playerNameLabel;
 
     public GameObject selectedObject;
@@ -13,8 +12,10 @@ public class PlayerUIControl : MonoBehaviour
 
     public delegate void MoveButtonDelegate(GameObject selectedHero);
     public delegate void CancelButtonDelegate();
+    public delegate void EndTurnButtonDelegate();
     public event MoveButtonDelegate moveHero;
     public event CancelButtonDelegate cancel;
+    public event EndTurnButtonDelegate endTurn;
 
     private void Update() {
     }
@@ -27,7 +28,10 @@ public class PlayerUIControl : MonoBehaviour
 
     public void TurnOn() {
         gameObject.SetActive(true);
-        //close all superfluous things
+    }
+
+    public void TurnOff() {
+        gameObject.SetActive(false);
     }
 
     #region SelectionHandling
@@ -41,7 +45,7 @@ public class PlayerUIControl : MonoBehaviour
         ActionMenu.SetActive(true);
         InfoMenu.SetActive(true);
 
-        if(isMyHero == true) {
+        if (isMyHero == true) {
             ActionMenu.transform.Find("MoveButton").gameObject.SetActive(true);
         }
         ActionMenu.transform.Find("CancelButton").gameObject.SetActive(true);
@@ -67,7 +71,7 @@ public class PlayerUIControl : MonoBehaviour
 
     public void TileSelected(Tile tile) {
         selectedObject = tile.gameObject;
-        
+
         GameObject ActionMenu = bottomRightUI.transform.Find("ActionMenuContainer").gameObject;
         GameObject InfoMenu = bottomRightUI.transform.Find("InformationMenuContainer").gameObject;
 
@@ -94,7 +98,7 @@ public class PlayerUIControl : MonoBehaviour
     }
 
     public void Deselection() {
-        if(selectedObject.tag == "Hero") {
+        if (selectedObject.tag == "Hero") {
             HeroDeselected(selectedObject.GetComponent<HeroControl>());
         }
         else if (selectedObject.tag == "Tile") {
@@ -108,8 +112,12 @@ public class PlayerUIControl : MonoBehaviour
 
     #region Events
 
+    public void onEndTurnButtonClicked() {
+        endTurn();
+    }
+
     public void onMoveButtonClicked() {
-        if(selectedObject.GetComponent<HeroControl>() != null) {
+        if (selectedObject.GetComponent<HeroControl>() != null) {
             moveHero(selectedObject);
             GameObject InfoMenu = bottomRightUI.transform.Find("InformationMenuContainer").gameObject;
             InfoMenu.transform.Find("SelectedDescription").Find("SelectedDescriptionText").gameObject.GetComponent<TextMeshProUGUI>().text = "Move Hero to selected tile.";

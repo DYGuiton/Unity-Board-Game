@@ -23,21 +23,24 @@ public class CameraManager {
         playerCamera = nuPlayerCameraPrefab.GetComponent<Camera>();
         playerCamera.enabled = false;
         playerCamera.GetComponent<AudioListener>().enabled = false;
-        newPlayer.transform.Find("PlayerController").GetComponent<PlayerControl>().onMyTurn += CameraManager_onMyTurn;
+        newPlayer.transform.Find("PlayerController").GetComponent<PlayerControl>().onMyTurn += onMyTurnCallback;
 
     }
 
-    private void CameraManager_onMyTurn(object sender, EventArgs e) {
+    private void onMyTurnCallback(object sender, EventArgs e) {
         if (currentCamera != null) {
             currentCamera.enabled = false;
             currentCamera.GetComponent<AudioListener>().enabled = false;
         }
 
-
-        ((PlayerControl)sender).viewCamera.enabled = true;
-        ((PlayerControl)sender).viewCamera.GetComponent<AudioListener>().enabled = true;
         currentCamera = ((PlayerControl)sender).viewCamera;
+        currentCamera.enabled = true;
+        currentCamera.GetComponent<AudioListener>().enabled = true;
 
         // Will want to have the camera lookAt the town tile of the character whose turn it is here
+    }
+
+    private void endMyTurnCallback(object sender, EventArgs e) {
+        
     }
 }

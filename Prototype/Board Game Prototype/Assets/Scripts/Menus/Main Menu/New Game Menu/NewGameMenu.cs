@@ -20,9 +20,9 @@ public class NewGameMenu : Menu {
         }
     }
 
-    private void StartGame(int nuMapSize) {
+    private void StartGame(int MapSize) {
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        gameManager.mapSize = nuMapSize;
+        gameManager.setMapSize(MapSize);
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

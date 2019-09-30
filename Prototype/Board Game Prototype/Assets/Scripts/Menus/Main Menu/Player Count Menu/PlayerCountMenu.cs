@@ -28,7 +28,7 @@ public class PlayerCountMenu : Menu {
 
     private void setPlayerCount(int playerCount) {
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        gameManager.playerCount = playerCount;
+        gameManager.setPlayerCount(playerCount);
     }
 
     private void OpenNewGameMenu() {

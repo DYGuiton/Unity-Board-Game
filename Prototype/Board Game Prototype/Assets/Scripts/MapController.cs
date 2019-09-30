@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class MapController : MonoBehaviour {
 
+    public int mapSize { get; protected set; }
     public Transform MapTransform;
-    public int playerCount { get; set; }
 
     public GameObject tileObject;
     public List<GameObject> tilePrefabs;

@@ -4,15 +4,29 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class PlayerManager : MonoBehaviour{
+public class PlayerManager : MonoBehaviour {
 
+    public int playerCount { get; protected set; }
     public List<Material> playerMaterials;
 
     public List<GameObject> playerObjectsList = new List<GameObject>();
     public GameObject playerPrefab;
     public GameObject heroPrefab;
 
-    //public Dictionary
+    private int nextPlayerTurn = 0;
+    public bool noTurnsLeft = false;
+
+    public void NextTurn() {
+        if (nextPlayerTurn >= playerObjectsList.Count) {
+            nextPlayerTurn = 0;
+            noTurnsLeft = true;
+        }
+        else {
+            playerObjectsList[nextPlayerTurn].transform.Find("PlayerController").GetComponent<PlayerControl>().setMyTurn(true);
+            nextPlayerTurn++;
+        }
+    }
+
 
     internal GameObject CreatePlayer(Tile nuTownTile) {
 
@@ -24,11 +38,17 @@ public class PlayerManager : MonoBehaviour{
 
         newPlayerController.setTownTile(nuTownTile, playerMaterials[newPlayerController.id]);
 
+        newPlayerController.onPlayerEndTurn += onEndTurnCallback;
+
         newPlayer.transform.SetParent(gameObject.transform);
 
         giveHero(newPlayerController);
 
         return newPlayer;
+    }
+
+    private void onEndTurnCallback(object sender, EventArgs e) {
+        NextTurn();
     }
 
     //this is nothing but a method to test how heroes will function within the game. 
@@ -42,7 +62,7 @@ public class PlayerManager : MonoBehaviour{
     private HeroType createRandomHeroType() {
         System.Random dice = new System.Random();
         HeroType heroType;
-        switch(dice.Next(0, 4)) {
+        switch (dice.Next(0, 4)) {
             case 0:
                 heroType = new AnatomistHeroType();
                 break;

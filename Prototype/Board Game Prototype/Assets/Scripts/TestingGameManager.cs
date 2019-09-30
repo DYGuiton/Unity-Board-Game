@@ -36,7 +36,7 @@ public class TestingGameManager : MonoBehaviour {
             playerCount = 4;
         }
         //this should be abstracted
-        mapController.playerCount = playerCount;
+        //mapController.playerCount = playerCount;
         mapController.setMapTransform();
         //mapController.GenerateFieldBlueprint(mapSize);
         //mapController.GenerateFieldFromBlueprint();

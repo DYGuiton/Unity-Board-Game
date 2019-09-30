@@ -2496,8 +2496,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db8904564d97e3a4189cb1002394f39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameParameters:
+    playerCount: 0
+    mapSize: 0
+  gamePhaseManager: {fileID: 0}
   mapController: {fileID: 0}
-  currentPlayer: {fileID: 0}
   cameraManager:
     cameraHolder: {fileID: 0}
     playerCameraPrefab: {fileID: 5197380800280318561, guid: e001829eb08ec624091d19304a1ae5cb,
