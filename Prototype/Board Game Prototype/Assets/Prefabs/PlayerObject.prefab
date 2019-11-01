@@ -43,6 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22abd40128c5e645b82eb99a4379142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentMouseOverObject: {fileID: 0}
+  currentPath: []
 --- !u!1 &7346875382342692595
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,11 +120,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc4eaa0043e9e44cb022ab916430251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
+  playerMaterial: {fileID: 0}
+  heroControllersList: []
   viewCamera: {fileID: 0}
-  selectedObject: {fileID: 0}
-  movingHero: {fileID: 0}
-  selectedObjectShader: {fileID: 0}
-  MoveButtonPressed: 0
   playerUIControl: {fileID: 0}
   playerPathFinder: {fileID: 0}
-  heroControllersList: []
+  selectedObject: {fileID: 0}
+  movingHero: {fileID: 0}
+  MoveButtonPressed: 0
+  cancelButtonPressed: 0
+  endTurnButtonPressed: 0

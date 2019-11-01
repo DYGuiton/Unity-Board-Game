@@ -16,10 +16,8 @@ public class GameManager : MonoBehaviour {
     }
 
     public Phase phase;
-    public MapController mapController;
-
-    [SerializeField]
     public GameParameters gameParameters;
+    public MapController mapController;
 
     public CameraManager cameraManager;
     public PlayerManager playerManager;
@@ -36,7 +34,7 @@ public class GameManager : MonoBehaviour {
         //Start the game in a menu system with NoPhase initialized
 
         //Set Defaults for the mapSize and playerCount
-        gameParameters = new GameParameters(1, 1);
+        gameParameters = new GameParameters(1, 1, new string[1]);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -67,9 +65,14 @@ public class GameManager : MonoBehaviour {
     private IEnumerator PlayerState() {
 
         Debug.Log("PlayerState: Enter");
+        
+        //Set the exit state to false
         playerManager.noTurnsLeft = false;
+
+        //Kickstart the player turns
         playerManager.NextTurn();
 
+        //Stop indefinitely until there are no turns left
         while (playerManager.noTurnsLeft == false) {
             yield return null;
         }
@@ -106,6 +109,9 @@ public class GameManager : MonoBehaviour {
         //Create the Players
         RegisterPlayers();
 
+        //Subscribe to events
+        SubscribeToEvents();
+
         //Begin the Game by setting the phase to Player Phase
         StartCoroutine(GameLoop());
     }
@@ -114,7 +120,7 @@ public class GameManager : MonoBehaviour {
         cameraManager.cameraHolder = GameObject.Find("Cameras");
         mapController = GameObject.Find("Map").GetComponent<MapController>();
         playerManager = GameObject.Find("Players").GetComponent<PlayerManager>();
-        userInterfaceManager = GameObject.Find("UserInterface").GetComponent<UserInterfaceManager>();
+        userInterfaceManager = GameObject.Find("UserInterfaceManager").GetComponent<UserInterfaceManager>();
     }
 
     private void InitializeMap() {
@@ -126,15 +132,25 @@ public class GameManager : MonoBehaviour {
     private void RegisterPlayers() {
         for (int i = 0; i < gameParameters.playerCount; i++) {
             if (i < 4) {
-                registerPlayer(mapController.townTileList[i]);
+                registerPlayer(gameParameters.playerNames[i], mapController.townTileList[i]);
             }
         }
     }
 
-    private void registerPlayer(Tile townTile) {
-        GameObject newPlayer = playerManager.CreatePlayer(townTile);
+    private void registerPlayer(string playerName, Tile townTile) {
+        GameObject newPlayer = playerManager.CreatePlayer(playerName, townTile);
         cameraManager.SetupPlayerCamera(newPlayer);
         userInterfaceManager.SetupPlayerUI(newPlayer);
+    }
+
+    private void SubscribeToEvents() {
+        playerManager.TurnChange += onPlayerTurnChange;
+    }
+
+    private void onPlayerTurnChange(String playerName, Material playerMaterial) {
+
+        userInterfaceManager.IndicateChangeTurn(playerName, playerMaterial);
+
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode aMode) {
@@ -153,5 +169,9 @@ public class GameManager : MonoBehaviour {
 
     public void setPlayerCount(int playerCount) {
         gameParameters.playerCount = playerCount;
+    }
+
+    public void setPlayerNames(string[] playerNames) {
+        gameParameters.playerNames = playerNames;
     }
 }

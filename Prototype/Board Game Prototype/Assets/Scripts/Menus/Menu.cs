@@ -3,7 +3,7 @@
 public abstract class Menu : MonoBehaviour {
     [SerializeField] public MenuButtonController menuButtonController = null;
 
-    private void Start() {
+    private void Awake() {
         menuButtonController.buttonPressedCallback += onMenuButtonPressed;
     }
 

@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUIControl : MonoBehaviour {
     public GameObject playerNameLabel;
 
     public GameObject selectedObject;
     public GameObject bottomRightUI;
+    public Material playerMaterial;
 
     public delegate void MoveButtonDelegate(GameObject selectedHero);
     public delegate void CancelButtonDelegate();
@@ -20,8 +22,11 @@ public class PlayerUIControl : MonoBehaviour {
     private void Update() {
     }
 
-    public void Setup(GameObject newPlayer) {
-        playerNameLabel.GetComponent<TextMeshProUGUI>().text = newPlayer.name;
+    public void Setup(PlayerControl newPlayerControl) {
+        playerNameLabel.GetComponent<TextMeshProUGUI>().text = newPlayerControl.playerName;
+        playerMaterial = newPlayerControl.playerMaterial;
+
+        gameObject.transform.GetChild(0).Find("TopRightUI").GetChild(0).GetComponent<Image>().material = playerMaterial;
         gameObject.SetActive(false);
 
     }

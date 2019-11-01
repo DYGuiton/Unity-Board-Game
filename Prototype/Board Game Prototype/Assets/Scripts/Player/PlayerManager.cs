@@ -13,6 +13,9 @@ public class PlayerManager : MonoBehaviour {
     public GameObject playerPrefab;
     public GameObject heroPrefab;
 
+    public delegate void PlayerTurnChangeDelegate(String playerName, Material playerMaterial);
+    public event PlayerTurnChangeDelegate TurnChange;
+
     private int nextPlayerTurn = 0;
     public bool noTurnsLeft = false;
 
@@ -22,19 +25,22 @@ public class PlayerManager : MonoBehaviour {
             noTurnsLeft = true;
         }
         else {
-            playerObjectsList[nextPlayerTurn].transform.Find("PlayerController").GetComponent<PlayerControl>().setMyTurn(true);
+            PlayerControl currentPlayer = playerObjectsList[nextPlayerTurn].transform.Find("PlayerController").GetComponent<PlayerControl>();
+            currentPlayer.setMyTurn(true);
+            TurnChange(currentPlayer.playerName, currentPlayer.playerMaterial);
             nextPlayerTurn++;
         }
     }
 
 
-    internal GameObject CreatePlayer(Tile nuTownTile) {
+    internal GameObject CreatePlayer(string playerName, Tile nuTownTile) {
 
         GameObject newPlayer = Instantiate(playerPrefab);
         PlayerControl newPlayerController = newPlayer.transform.Find("PlayerController").GetComponent<PlayerControl>();
 
         playerObjectsList.Add(newPlayer);
         newPlayerController.id = playerObjectsList.IndexOf(newPlayer);
+        newPlayerController.playerName = playerName;
 
         newPlayerController.setTownTile(nuTownTile, playerMaterials[newPlayerController.id]);
 

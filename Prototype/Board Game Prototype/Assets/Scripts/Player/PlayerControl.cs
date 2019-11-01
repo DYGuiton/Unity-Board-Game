@@ -5,8 +5,9 @@ using UnityEngine.EventSystems;
 
 public class PlayerControl : MonoBehaviour {
 
-    public int id { get; set; }
-    public Material playerMaterial { get; set; }
+    public int id;
+    public string playerName;
+    public Material playerMaterial;
     public Tile townTile { get; set; }
     public List<HeroControl> heroControllersList;
 
