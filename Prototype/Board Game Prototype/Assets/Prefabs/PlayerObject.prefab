@@ -86,6 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7346875382906631851}
   - component: {fileID: 7346875382906631850}
+  - component: {fileID: 1950009281875295721}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -121,8 +122,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  playerName: 
   playerMaterial: {fileID: 0}
   heroControllersList: []
+  playerUI: {fileID: 0}
   viewCamera: {fileID: 0}
   playerUIControl: {fileID: 0}
   playerPathFinder: {fileID: 0}
@@ -131,3 +134,18 @@ MonoBehaviour:
   MoveButtonPressed: 0
   cancelButtonPressed: 0
   endTurnButtonPressed: 0
+--- !u!114 &1950009281875295721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7346875382906631852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14eb32710cb26740bf5c9e31fd8c86a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wood: 0
+  food: 0
+  happy: 0

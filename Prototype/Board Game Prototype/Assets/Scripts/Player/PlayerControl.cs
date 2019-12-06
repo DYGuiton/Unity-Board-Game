@@ -47,6 +47,20 @@ public class PlayerControl : MonoBehaviour {
 
         HandlePlayerSelection();
 
+        if (Input.GetKeyDown(KeyCode.M)) {
+            gameObject.GetComponent<PlayerAssets>().IncrementWood(1);
+            gameObject.GetComponent<PlayerAssets>().IncrementFood(1);
+            gameObject.GetComponent<PlayerAssets>().IncrementJoy(1);
+            UpdateUIResourceDisplay();
+        }
+
+        if (Input.GetKeyDown(KeyCode.N)) {
+            gameObject.GetComponent<PlayerAssets>().DecrementWood(1);
+            gameObject.GetComponent<PlayerAssets>().DecrementFood(1);
+            gameObject.GetComponent<PlayerAssets>().DecrementJoy(1);
+            UpdateUIResourceDisplay();
+        }
+
         if (endTurnButtonPressed) {
             setMyTurn(false);
         }
@@ -198,6 +212,14 @@ public class PlayerControl : MonoBehaviour {
         cancelButtonPressed = false;
         MoveButtonPressed = false;
         endTurnButtonPressed = false;
+    }
+
+    #endregion
+
+    #region Manual Updates
+
+    public void UpdateUIResourceDisplay() {
+        playerUIControl.UpdateResourceDisplay(gameObject.GetComponent<PlayerAssets>());
     }
 
     #endregion

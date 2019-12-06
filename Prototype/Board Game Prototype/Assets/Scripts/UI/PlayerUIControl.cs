@@ -19,6 +19,16 @@ public class PlayerUIControl : MonoBehaviour {
     public event CancelButtonDelegate cancel;
     public event EndTurnButtonDelegate endTurn;
 
+    public TextMeshProUGUI woodContainer;
+    public TextMeshProUGUI foodContainer;
+    public TextMeshProUGUI joyContainer;
+
+    public void Start() {
+        woodContainer = gameObject.transform.GetChild(0).Find("OverHeadUI").Find("ResourceContainer").Find("Wood").Find("ResourceValue").GetComponent<TextMeshProUGUI>();
+        foodContainer = gameObject.transform.GetChild(0).Find("OverHeadUI").Find("ResourceContainer").Find("Food").Find("ResourceValue").GetComponent<TextMeshProUGUI>();
+        joyContainer = gameObject.transform.GetChild(0).Find("OverHeadUI").Find("ResourceContainer").Find("Joy").Find("ResourceValue").GetComponent<TextMeshProUGUI>();
+    }
+
     private void Update() {
     }
 
@@ -134,4 +144,15 @@ public class PlayerUIControl : MonoBehaviour {
     }
 
     #endregion
+
+    #region External Updates
+
+    public void UpdateResourceDisplay(PlayerAssets playerAssets) {
+        woodContainer.SetText(playerAssets.wood.ToString());
+        foodContainer.SetText(playerAssets.food.ToString());
+        joyContainer.SetText(playerAssets.joy.ToString());
+    }
+
+    #endregion
+
 }
