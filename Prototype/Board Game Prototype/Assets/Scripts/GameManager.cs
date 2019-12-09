@@ -109,8 +109,11 @@ public class GameManager : MonoBehaviour {
         //Create the Players
         RegisterPlayers();
 
-        //Subscribe to events
+        //Subscribe to events and Delegates
         SubscribeToEvents();
+
+        //Set Manager Variables
+        SetManagerVariables();
 
         //Begin the Game by setting the phase to Player Phase
         StartCoroutine(GameLoop());
@@ -135,6 +138,10 @@ public class GameManager : MonoBehaviour {
                 registerPlayer(gameParameters.playerNames[i], mapController.townTileList[i]);
             }
         }
+    }
+
+    private void SetManagerVariables() {
+        cameraManager.mapSize = mapController.mapSize;
     }
 
     private void registerPlayer(string playerName, Tile townTile) {

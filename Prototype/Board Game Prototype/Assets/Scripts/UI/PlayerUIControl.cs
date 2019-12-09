@@ -147,7 +147,7 @@ public class PlayerUIControl : MonoBehaviour {
 
     #region External Updates
 
-    public void UpdateResourceDisplay(PlayerAssets playerAssets) {
+    public void UpdateResourceDisplay(PlayerVariables playerAssets) {
         woodContainer.SetText(playerAssets.wood.ToString());
         foodContainer.SetText(playerAssets.food.ToString());
         joyContainer.SetText(playerAssets.joy.ToString());

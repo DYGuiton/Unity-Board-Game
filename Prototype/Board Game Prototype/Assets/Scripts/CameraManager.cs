@@ -6,6 +6,8 @@ using System;
 [Serializable]
 public class CameraManager {
 
+    public int mapSize;
+
     public GameObject cameraHolder;
     Dictionary<int, Camera> playerCameraMap;
     public GameObject playerCameraPrefab;
@@ -23,7 +25,10 @@ public class CameraManager {
         playerCamera = nuPlayerCameraPrefab.GetComponent<Camera>();
         playerCamera.enabled = false;
         playerCamera.GetComponent<AudioListener>().enabled = false;
-        newPlayer.transform.Find("PlayerController").GetComponent<PlayerControl>().onMyTurn += onMyTurnCallback;
+
+        PlayerControl playerController = newPlayer.transform.Find("PlayerController").GetComponent<PlayerControl>();
+        playerController.onMyTurn += onMyTurnCallback;
+        playerCamera.GetComponent<CameraController>().FocusCameraOnPlayer(playerController.id);
 
     }
 

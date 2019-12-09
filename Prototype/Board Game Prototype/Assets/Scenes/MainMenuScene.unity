@@ -5275,8 +5275,9 @@ MonoBehaviour:
     playerNames: []
   mapController: {fileID: 0}
   cameraManager:
+    mapSize: 0
     cameraHolder: {fileID: 0}
-    playerCameraPrefab: {fileID: 5197380800280318561, guid: e001829eb08ec624091d19304a1ae5cb,
+    playerCameraPrefab: {fileID: 6675810337413735725, guid: eb71b7c1c095558448b1e07f379b4a41,
       type: 3}
     currentCamera: {fileID: 0}
   playerManager: {fileID: 0}
@@ -6075,7 +6076,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'Build Version: 0.027'
+  m_text: 'Build Version: 0.029'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

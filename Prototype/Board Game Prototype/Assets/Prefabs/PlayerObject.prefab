@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7346875382906631851}
   - component: {fileID: 7346875382906631850}
-  - component: {fileID: 1950009281875295721}
+  - component: {fileID: 6828676434882936624}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -125,7 +125,6 @@ MonoBehaviour:
   playerName: 
   playerMaterial: {fileID: 0}
   heroControllersList: []
-  playerUI: {fileID: 0}
   viewCamera: {fileID: 0}
   playerUIControl: {fileID: 0}
   playerPathFinder: {fileID: 0}
@@ -134,7 +133,7 @@ MonoBehaviour:
   MoveButtonPressed: 0
   cancelButtonPressed: 0
   endTurnButtonPressed: 0
---- !u!114 &1950009281875295721
+--- !u!114 &6828676434882936624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,6 +145,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b14eb32710cb26740bf5c9e31fd8c86a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wood: 0
-  food: 0
-  happy: 0

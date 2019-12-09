@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PlayerAssets : MonoBehaviour {
+public class PlayerVariables : MonoBehaviour {
 
     [SerializeField]
     public int wood { get; private set; } = 0;
@@ -11,6 +11,8 @@ public class PlayerAssets : MonoBehaviour {
     public int food { get; private set; } = 0;
     [SerializeField]
     public int joy { get; private set; } = 0;
+
+
 
     #region Increments
 
