@@ -29,6 +29,7 @@ public class MapController : MonoBehaviour {
     //Generate a blueprint for a flat hexagonal map
     //This needs to be made into it's own class that extends some basic MapBlueprint class
     public void GenerateFlatHexagonBlueprint(int size) {
+        mapSize = size;
         blueprint = new List<TileBlueprint>();
         int radius = size;
 
