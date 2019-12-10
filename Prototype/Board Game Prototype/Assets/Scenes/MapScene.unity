@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &34586550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,8 +157,8 @@ MonoBehaviour:
     playerNames: []
   mapController: {fileID: 0}
   cameraManager:
-    cameraHolder: {fileID: 1180598050}
-    playerCameraPrefab: {fileID: 5197380800280318561, guid: e001829eb08ec624091d19304a1ae5cb,
+    cameraHolder: {fileID: 0}
+    playerCameraPrefab: {fileID: 6675810337413735725, guid: eb71b7c1c095558448b1e07f379b4a41,
       type: 3}
     currentCamera: {fileID: 0}
   playerManager: {fileID: 0}

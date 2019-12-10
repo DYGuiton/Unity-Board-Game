@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
         EndPhase
     }
 
+    [SerializeField]
     public Phase phase;
     public GameParameters gameParameters;
     public MapController mapController;
@@ -106,10 +107,13 @@ public class GameManager : MonoBehaviour {
         //Create the Map using the blueprint system
         InitializeMap();
 
+        //Set Manager Variables
+        SetManagerVariables();
+
         //Create the Players
         RegisterPlayers();
 
-        //Subscribe to events
+        //Subscribe to events and Delegates
         SubscribeToEvents();
 
         //Begin the Game by setting the phase to Player Phase
@@ -127,6 +131,10 @@ public class GameManager : MonoBehaviour {
         mapController.setMapTransform();
         mapController.GenerateFlatHexagonBlueprint(gameParameters.mapSize);
         mapController.GenerateFlatHexField();
+    }
+
+    private void SetManagerVariables() {
+        cameraManager.mapSize = mapController.mapSize;
     }
 
     private void RegisterPlayers() {

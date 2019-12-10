@@ -6,6 +6,8 @@ using System;
 [Serializable]
 public class CameraManager {
 
+    public int mapSize;
+
     public GameObject cameraHolder;
     Dictionary<int, Camera> playerCameraMap;
     public GameObject playerCameraPrefab;
@@ -23,7 +25,11 @@ public class CameraManager {
         playerCamera = nuPlayerCameraPrefab.GetComponent<Camera>();
         playerCamera.enabled = false;
         playerCamera.GetComponent<AudioListener>().enabled = false;
-        newPlayer.transform.Find("PlayerController").GetComponent<PlayerControl>().onMyTurn += onMyTurnCallback;
+
+        PlayerControl playerController = newPlayer.transform.Find("PlayerController").GetComponent<PlayerControl>();
+        playerController.onMyTurn += onMyTurnCallback;
+        playerCamera.GetComponent<CameraController>().FocusCameraOnPlayer(playerController.id);
+        playerCamera.GetComponent<CameraController>().panLimit = new Vector2(mapSize * 4, mapSize * 4);
 
     }
 
@@ -41,6 +47,6 @@ public class CameraManager {
     }
 
     private void endMyTurnCallback(object sender, EventArgs e) {
-        
+
     }
 }
