@@ -103,6 +103,8 @@ public class TestingGameManager : MonoBehaviour {
 
         InitializeMap();
 
+        SetManagerVariables();
+
         RegisterPlayers();
 
         SubscribeToEvents();
@@ -121,6 +123,10 @@ public class TestingGameManager : MonoBehaviour {
         mapController.setMapTransform();
         mapController.GenerateFlatHexagonBlueprint(gameParameters.mapSize);
         mapController.GenerateFlatHexField();
+    }
+
+    private void SetManagerVariables() {
+        cameraManager.mapSize = mapController.mapSize;
     }
 
     private void RegisterPlayers() {

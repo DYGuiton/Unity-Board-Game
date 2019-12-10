@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
         EndPhase
     }
 
+    [SerializeField]
     public Phase phase;
     public GameParameters gameParameters;
     public MapController mapController;
